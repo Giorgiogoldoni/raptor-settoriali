@@ -1,0 +1,9 @@
+{
+  "updated_display": "In attesa del primo calcolo...",
+  "vix": null, "vstoxx": null, "regime": "NORMALE", "xeon_price": null,
+  "portfolios": {
+    "europa": {"name":"🇪🇺 EUROPA","positions":[],"use_xeon":true,"watchlist":[],"qualified":[],"all":[]},
+    "usa":    {"name":"🇺🇸 USA",   "positions":[],"use_xeon":true,"watchlist":[],"qualified":[],"all":[]},
+    "mondo":  {"name":"🌍 MONDO",  "positions":[],"use_xeon":true,"watchlist":[],"qualified":[],"all":[]}
+  }
+}
