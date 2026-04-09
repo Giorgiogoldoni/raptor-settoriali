@@ -1,0 +1,30 @@
+name: 🦅 RAPTOR SETTORIALI — Chart Data
+
+on:
+  schedule:
+    - cron: '0 9 * * 1-5'   # 11:00 CET (9:00 UTC)
+    - cron: '0 15 * * 1-5'  # 17:00 CET (15:00 UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-charts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - run: pip install yfinance pandas --quiet
+      - run: python raptor_settoriali_chart_fetch.py
+      - run: |
+          git config user.name "RAPTOR Bot"
+          git config user.email "raptor-bot@noreply.github.com"
+          git add settoriali_chart.json
+          git diff --staged --quiet || (git commit -m "📈 SETT chart $(date +'%d/%m/%Y %H:%M')" && git push)
