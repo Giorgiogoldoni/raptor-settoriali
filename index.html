@@ -316,11 +316,20 @@ function renderPanel(portKey, portData, xeonPrice){
   const cooldownKeys = Object.keys(portData.cooldown||{});
 
   if(!n){
+    const benchPriceStr2 = portData.benchmark_price ? ' @ '+portData.benchmark_price.toFixed(3) : '';
+    const benchP30Str2 = portData.benchmark_p30 != null ? ' ('+( portData.benchmark_p30>0?'+':'')+portData.benchmark_p30.toFixed(2)+'% 30gg)' : '';
+    const benchInfo2 = document.querySelector('#card-'+portKey+' .port-bench');
+    if(benchInfo2) benchInfo2.innerHTML += '<br><strong>'+(portData.benchmark_label||'')+'</strong>'+benchPriceStr2+'<span style="color:'+(portData.benchmark_p30>=0?'#1a7f37':'#cf222e')+'">'+benchP30Str2+'</span>';
     body.innerHTML = renderXeon(xeonPrice);
     cnt.textContent = `0 pos — XEON 100%${cooldownKeys.length?' | '+cooldownKeys.length+' cool-down':''}`;
     return;
   }
 
+  // Benchmark price in header
+  const benchPriceStr = portData.benchmark_price ? ' @ '+portData.benchmark_price.toFixed(3) : '';
+  const benchP30Str = portData.benchmark_p30 != null ? ' ('+( portData.benchmark_p30>0?'+':'')+portData.benchmark_p30.toFixed(2)+'% 30gg)' : '';
+  const benchInfo = document.querySelector('#card-'+portKey+' .port-bench');
+  if(benchInfo) benchInfo.innerHTML += '<br><strong>'+( portData.benchmark_label||'')+'</strong>'+benchPriceStr+'<span style="color:'+(portData.benchmark_p30>=0?'#1a7f37':'#cf222e')+'">'+benchP30Str+'</span>';
   cnt.textContent = `${n} posizione${n>1?'i':''}${cooldownKeys.length?' | '+cooldownKeys.length+' cool-down':''}`;
   let html = '<div class="positions">';
   portData.positions.forEach(p => { html += renderPos(p, portData.benchmark_label||''); });
@@ -356,6 +365,26 @@ function renderTable(portKey, portData){
       <td style="font-size:11px">${d.price?.toFixed(3)||'—'}</td>
     </tr>`;
   }).join('');
+
+  // Benchmark reference row
+  const bp30c = portData.benchmark_p30>=0?'var(--green)':'var(--red)';
+  const bp30s = portData.benchmark_p30!=null?(portData.benchmark_p30>0?'+':'')+portData.benchmark_p30.toFixed(2)+'%':'—';
+  const benchRow = `<tr style="background:#f6f8fa;border-top:2px solid var(--border)">
+    <td style="font-weight:700;color:var(--text2)">📊 ${portData.benchmark_label||'—'}</td>
+    <td style="font-size:11px;color:var(--text2)">Benchmark di riferimento</td>
+    <td><span style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:2px 7px;font-size:10px;color:var(--text2)">— REF</span></td>
+    <td style="color:var(--text2)">—</td>
+    <td style="color:var(--text2)">—</td>
+    <td style="color:var(--text2)">—</td>
+    <td style="color:var(--text2)">—</td>
+    <td style="color:var(--text2)">—</td>
+    <td style="color:var(--text2)">—</td>
+    <td style="color:var(--text2)">—</td>
+    <td style="color:var(--text2)">—</td>
+    <td style="font-weight:600;color:${bp30c}">${bp30s}</td>
+    <td style="font-size:11px;font-weight:600">${portData.benchmark_price?portData.benchmark_price.toFixed(3):'—'}</td>
+  </tr>`;
+
   return `<div class="table-section">
     <div class="table-header"><div class="table-title">${portData.name} — tutti i settori</div>
       <div style="font-size:10px;color:var(--text2)">Benchmark: ${portData.benchmark_label} ${portData.benchmark_price?'@ '+portData.benchmark_price.toFixed(3):''} ${portData.benchmark_p30!=null?'('+( portData.benchmark_p30>0?'+':'')+portData.benchmark_p30.toFixed(2)+'% 30gg)':''}</div></div>
@@ -365,7 +394,7 @@ function renderTable(portKey, portData){
         <th>ER RS</th><th>Trend RS</th><th>K% RS</th><th>Baf RS</th>
         <th>RS vs KAMA</th><th>ETF vs KAMA</th><th>Perf 7g RS</th><th>Perf 30g RS</th><th>Prezzo</th>
       </tr></thead>
-      <tbody>${rows}</tbody>
+      <tbody>${rows}${benchRow}</tbody>
     </table></div>
   </div>`;
 }
@@ -445,6 +474,13 @@ function calcRSIc(p,n=14){if(p.length<n+1)return null;let g=0,l=0;for(let i=p.le
 function trendycatorC(v){if(v.length<55)return'GRIGIO';const e21=emaArr(v,21),e55=emaArr(v,55);const n=e21.length-1;if(e21[n]>e55[n]&&e21[n]>e21[n-1])return'VERDE';if(e21[n]<e55[n]&&e21[n]<e21[n-1])return'ROSSO';return'GRIGIO';}
 function calcSARc(h,l,af0=0.02,afMax=0.2){if(h.length<5)return{sar:new Array(h.length).fill(null),bull:new Array(h.length).fill(true)};const sarA=new Array(h.length).fill(null),bullA=new Array(h.length).fill(true);let sar=l[0],ep=h[0],af=af0,bull=true;sarA[0]=sar;bullA[0]=true;for(let i=1;i<h.length;i++){let ns;if(bull){ns=sar+af*(ep-sar);ns=Math.min(ns,l[Math.max(0,i-1)],l[Math.max(0,i-2)]);if(l[i]<ns){bull=false;ns=ep;ep=l[i];af=af0;}else{if(h[i]>ep){ep=h[i];af=Math.min(af+af0,afMax);}}}else{ns=sar+af*(ep-sar);ns=Math.max(ns,h[Math.max(0,i-1)],h[Math.max(0,i-2)]);if(h[i]>ns){bull=true;ns=ep;ep=h[i];af=af0;}else{if(l[i]<ep){ep=l[i];af=Math.min(af+af0,afMax);}}}sar=ns;sarA[i]=ns;bullA[i]=bull;}return{sar:sarA,bull:bullA};}
 
+// Bench label → full Yahoo ticker mapping
+const BENCH_MAP = {
+  '600X': '600X.MI',
+  'SP5A': 'SP5A.MI',
+  'SWRD': 'SWRD.MI',
+};
+
 async function loadChartData(sym, tf){
   try{
     const p = tfParams(tf); let bars=[], benchBars=[];
@@ -452,8 +488,9 @@ async function loadChartData(sym, tf){
       const j = await getChartJson();
       const key = Object.keys(j.data||{}).find(k=>k.toLowerCase()===sym.toLowerCase());
       if(key){ const raw=p.hourly?j.data[key].h:j.data[key].d; bars=(raw||[]).slice(-p.n); }
-      // Find bench
-      const bKey = Object.keys(j.data||{}).find(k=>k.toLowerCase()===currentBench.toLowerCase());
+      // Find bench — map label to full ticker
+      const benchTicker = BENCH_MAP[currentBench] || currentBench;
+      const bKey = Object.keys(j.data||{}).find(k=>k.toLowerCase()===benchTicker.toLowerCase());
       if(bKey){ const raw=p.hourly?j.data[bKey].h:j.data[bKey].d; benchBars=(raw||[]).slice(-p.n); }
     }catch(e){ console.warn(e); }
     if(!bars.length){ document.getElementById('loadMsg').textContent='Dati non disponibili per questo timeframe'; return; }
