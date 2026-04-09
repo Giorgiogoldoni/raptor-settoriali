@@ -1,0 +1,5 @@
+{
+  "europa": {"positions": [], "history": [], "cooldown": {}},
+  "usa":    {"positions": [], "history": [], "cooldown": {}},
+  "mondo":  {"positions": [], "history": [], "cooldown": {}}
+}
