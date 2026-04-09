@@ -1,5 +1,42 @@
 {
-  "europa": {"positions": [], "history": [], "cooldown": {}},
-  "usa":    {"positions": [], "history": [], "cooldown": {}},
-  "mondo":  {"positions": [], "history": [], "cooldown": {}}
+  "europa": {
+    "positions": [],
+    "history": [],
+    "cooldown": {}
+  },
+  "usa": {
+    "positions": [
+      {
+        "ticker": "SXLI.MI",
+        "label": "SXLI",
+        "name": "SPDR S&P US Industrials",
+        "entry_date": "2026-04-09",
+        "entry_price": 63.2,
+        "current_price": 63.2,
+        "target_price": 66.36,
+        "current_gain_pct": 0.0,
+        "days_held": 0,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "LONG_CONF",
+        "score": 29.8,
+        "rs_er": 0.1129,
+        "rs_trend": "VERDE",
+        "rs_baff": 5,
+        "rs_kpct": 0.77,
+        "rs_above": true,
+        "sec_above": true,
+        "weight_pct": 100.0,
+        "warning": null
+      }
+    ],
+    "history": [],
+    "cooldown": {}
+  },
+  "mondo": {
+    "positions": [],
+    "history": [],
+    "cooldown": {}
+  }
 }
