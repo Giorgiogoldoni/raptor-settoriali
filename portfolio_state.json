@@ -7,22 +7,46 @@
         "name": "SPDR MSCI Eu Technology",
         "entry_date": "2026-04-13",
         "entry_price": 164.4,
-        "current_price": 167.2,
+        "current_price": 169.84,
         "target_price": 172.62,
-        "current_gain_pct": 1.7,
+        "current_gain_pct": 3.31,
+        "days_held": 1,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "LONG_CONF",
+        "score": 77.9,
+        "rs_er": 0.2668,
+        "rs_trend": "VERDE",
+        "rs_baff": 4,
+        "rs_kpct": 4.77,
+        "rs_above": true,
+        "sec_above": true,
+        "weight_pct": 54.1,
+        "warning": null
+      },
+      {
+        "ticker": "STQX.MI",
+        "label": "STQX",
+        "name": "SPDR MSCI Eu Industrials",
+        "entry_date": "2026-04-14",
+        "entry_price": 434.3,
+        "current_price": 434.3,
+        "target_price": 456.015,
+        "current_gain_pct": 0.0,
         "days_held": 0,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "LONG_CONF",
-        "score": 65.1,
-        "rs_er": 0.1194,
+        "score": 66.2,
+        "rs_er": 0.4958,
         "rs_trend": "VERDE",
-        "rs_baff": 3,
-        "rs_kpct": 4.37,
+        "rs_baff": 7,
+        "rs_kpct": 1.37,
         "rs_above": true,
         "sec_above": true,
-        "weight_pct": 100.0,
+        "weight_pct": 45.9,
         "warning": null
       }
     ],
@@ -37,19 +61,19 @@
         "name": "SPDR S&P US Industrials",
         "entry_date": "2026-04-09",
         "entry_price": 63.2,
-        "current_price": 63.36,
+        "current_price": 63.72,
         "target_price": 66.36,
-        "current_gain_pct": 0.25,
-        "days_held": 4,
+        "current_gain_pct": 0.82,
+        "days_held": 5,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "WATCH",
-        "score": 42.5,
-        "rs_er": 0.1359,
+        "score": 44.7,
+        "rs_er": 0.0672,
         "rs_trend": "VERDE",
-        "rs_baff": 7,
-        "rs_kpct": 0.54,
+        "rs_baff": 8,
+        "rs_kpct": 0.56,
         "rs_above": true,
         "sec_above": true,
         "weight_pct": 100.0,
@@ -60,7 +84,8 @@
     "cooldown": {}
   },
   "mondo": {
-    "positions": [
+    "positions": [],
+    "history": [
       {
         "ticker": "WIND.MI",
         "label": "WIND",
@@ -83,10 +108,15 @@
         "rs_above": true,
         "sec_above": true,
         "weight_pct": 100.0,
-        "warning": null
+        "warning": null,
+        "exit_reason": "RS Line sotto KAMA RS",
+        "exit_price": 80.7,
+        "final_gain_pct": -0.58,
+        "exit_date": "2026-04-14"
       }
     ],
-    "history": [],
-    "cooldown": {}
+    "cooldown": {
+      "WIND.MI": "2026-04-14"
+    }
   }
 }
