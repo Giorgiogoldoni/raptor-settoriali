@@ -7,23 +7,26 @@
         "name": "SPDR MSCI Eu Technology",
         "entry_date": "2026-04-13",
         "entry_price": 164.4,
-        "current_price": 169.82,
+        "current_price": 170.86,
         "target_price": 172.62,
-        "current_gain_pct": 3.3,
-        "days_held": 1,
+        "current_gain_pct": 3.93,
+        "days_held": 2,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "LONG_CONF",
-        "score": 75.0,
-        "rs_er": 0.2554,
+        "score": 89.7,
+        "rs_er": 0.4183,
         "rs_trend": "VERDE",
-        "rs_baff": 4,
-        "rs_kpct": 4.52,
+        "rs_baff": 5,
+        "rs_kpct": 4.44,
         "rs_above": true,
         "sec_above": true,
-        "weight_pct": 52.6,
-        "warning": null
+        "weight_pct": 73.7,
+        "warning": null,
+        "sar_bullish": true,
+        "vortex_bullish": false,
+        "rvi_bullish": true
       },
       {
         "ticker": "STQX.MI",
@@ -31,30 +34,34 @@
         "name": "SPDR MSCI Eu Industrials",
         "entry_date": "2026-04-14",
         "entry_price": 434.3,
-        "current_price": 436.05,
+        "current_price": 435.3,
         "target_price": 456.015,
-        "current_gain_pct": 0.4,
-        "days_held": 0,
+        "current_gain_pct": 0.23,
+        "days_held": 1,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
-        "signal": "LONG_CONF",
-        "score": 67.7,
-        "rs_er": 0.5048,
+        "signal": "NEUTRO",
+        "score": 32.0,
+        "rs_er": 0.503,
         "rs_trend": "VERDE",
-        "rs_baff": 7,
-        "rs_kpct": 1.49,
+        "rs_baff": 0,
+        "rs_kpct": 0.97,
         "rs_above": true,
         "sec_above": true,
-        "weight_pct": 47.4,
-        "warning": null
+        "weight_pct": 26.3,
+        "warning": null,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": true
       }
     ],
     "history": [],
     "cooldown": {}
   },
   "usa": {
-    "positions": [
+    "positions": [],
+    "history": [
       {
         "ticker": "SXLI.MI",
         "label": "SXLI",
@@ -77,11 +84,16 @@
         "rs_above": true,
         "sec_above": true,
         "weight_pct": 100.0,
-        "warning": null
+        "warning": null,
+        "exit_reason": "RS Line sotto KAMA RS",
+        "exit_price": 63.8,
+        "final_gain_pct": 0.95,
+        "exit_date": "2026-04-15"
       }
     ],
-    "history": [],
-    "cooldown": {}
+    "cooldown": {
+      "SXLI.MI": "2026-04-15"
+    }
   },
   "mondo": {
     "positions": [],
