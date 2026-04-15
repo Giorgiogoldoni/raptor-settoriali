@@ -95,10 +95,10 @@ def get_ohlcv(ticker: str):
         if len(df) < 55:
             return None
         return {
-            'close':  [float(x) for x in df['Close'].tolist()],
-            'high':   [float(x) for x in df['High'].tolist()],
-            'low':    [float(x) for x in df['Low'].tolist()],
-            'dates':  [str(d.date()) for d in df.index.tolist()],
+            'close': [float(x) for x in df['Close'].tolist()],
+            'high':  [float(x) for x in df['High'].tolist()],
+            'low':   [float(x) for x in df['Low'].tolist()],
+            'open':  [float(x) for x in df['Open'].tolist()] if 'Open' in df.columns else [float(x) for x in df['Close'].tolist()],
         }
     except Exception as e:
         print(f"    fetch error {ticker}: {e}")
@@ -190,6 +190,52 @@ def calc_cross_days(values, kama):
             return len(values)-1-i
     return 999
 
+
+def calc_sar(high, low, af0=0.02, af_max=0.2):
+    if len(high)<5: return low[-1], True
+    sar,ep,af,bull=low[0],high[0],af0,True; sars=[sar]
+    for i in range(1,len(high)):
+        prev=sars[-1]
+        if bull:
+            new=prev+af*(ep-prev)
+            cands=low[max(0,i-2):i]; new=min(new,min(cands)) if cands else new
+            if low[i]<new: bull,new,ep,af=False,ep,low[i],af0
+            else:
+                if high[i]>ep: ep=high[i]; af=min(af+af0,af_max)
+        else:
+            new=prev+af*(ep-prev)
+            cands=high[max(0,i-2):i]; new=max(new,max(cands)) if cands else new
+            if high[i]>new: bull,new,ep,af=True,ep,high[i],af0
+            else:
+                if low[i]<ep: ep=low[i]; af=min(af+af0,af_max)
+        sars.append(new)
+    return round(sars[-1],5), bull
+
+def calc_vortex(high, low, close, n=14):
+    if len(close)<n+1: return 1.0,1.0,False
+    vm_p=[abs(high[i]-low[i-1]) for i in range(1,len(close))]
+    vm_m=[abs(low[i]-high[i-1]) for i in range(1,len(close))]
+    tr=[max(high[i]-low[i],abs(high[i]-close[i-1]),abs(low[i]-close[i-1]))
+        for i in range(1,len(close))]
+    ts=sum(tr[-n:])
+    vip=round(sum(vm_p[-n:])/ts if ts>0 else 1,4)
+    vim=round(sum(vm_m[-n:])/ts if ts>0 else 1,4)
+    return vip,vim,vip>vim
+
+def calc_rvi(close, open_, high, low, n=10):
+    if len(close)<n+4: return 0.0,0.0,False
+    num,den=[],[]
+    for i in range(3,len(close)):
+        nv=(close[i]-open_[i]+2*(close[i-1]-open_[i-1])+2*(close[i-2]-open_[i-2])+(close[i-3]-open_[i-3]))/6
+        dv=(high[i]-low[i]+2*(high[i-1]-low[i-1])+2*(high[i-2]-low[i-2])+(high[i-3]-low[i-3]))/6
+        num.append(nv); den.append(dv)
+    if len(num)<n: return 0.0,0.0,False
+    rs=[sum(num[i-n+1:i+1])/(sum(den[i-n+1:i+1]) or 1) for i in range(n-1,len(num))]
+    if len(rs)<4: return 0.0,0.0,False
+    ss=[(rs[i]+2*rs[i-1]+2*rs[i-2]+rs[i-3])/6 for i in range(3,len(rs))]
+    if not ss: return 0.0,0.0,False
+    return round(rs[-1],6),round(ss[-1],6),rs[-1]>ss[-1]
+
 def calc_score_rs(er, baff, k_pct, p7, p30, ao_pos, trend):
     s = (er*30 + min(baff,10)*5 + min(abs(k_pct),5)*3
          + max(-10,min(5,p7))*4
@@ -211,13 +257,15 @@ def analyze_sector(sector, bench_close, regime):
     if ohlcv is None:
         return None
 
-    sec_close = ohlcv['close']
+    sec_close = ohlcv['close']; sec_high=ohlcv['high']
+    sec_low=ohlcv['low'];       sec_open=ohlcv['open']
     n = min(len(sec_close), len(bench_close))
     if n < 55:
         return None
 
-    sec_c  = sec_close[-n:]
-    ben_c  = bench_close[-n:]
+    sec_c=sec_close[-n:]; sec_h=sec_high[-n:]
+    sec_l=sec_low[-n:];   sec_o=sec_open[-n:]
+    ben_c=bench_close[-n:]
 
     # RS Line
     rs = [s/b if b > 0 else 1.0 for s, b in zip(sec_c, ben_c)]
@@ -240,6 +288,11 @@ def analyze_sector(sector, bench_close, regime):
     sec_above = sec_c[-1] > sec_kama[-1]
     sec_trend = trendycator(sec_c)
 
+    # SAR, Vortex, RVI on price
+    sar_val,sar_bull   = calc_sar(sec_h,sec_l)
+    vi_plus,vi_minus,vortex_bull = calc_vortex(sec_h,sec_l,sec_c)
+    rvi_val,rvi_sig,rvi_bull     = calc_rvi(sec_c,sec_o,sec_h,sec_l)
+
     score = calc_score_rs(rs_er, rs_baff, rs_kpct, rs_p7, rs_p30, rs_ao > 0, rs_trend)
 
     # Signal
@@ -260,13 +313,14 @@ def analyze_sector(sector, bench_close, regime):
         qualifies = True
 
     return {
-        'ticker':     ticker,
-        'label':      label,
-        'name':       name,
-        'price':      round(sec_c[-1], 4),
-        'sec_kama':   round(sec_kama[-1], 4),
-        'sec_above':  sec_above,
-        'rs':         round(rs[-1], 6),
+        'ticker':ticker,'label':label,'name':name,
+        'price':round(sec_c[-1],4),'sec_kama':round(sec_kama[-1],4),
+        'sec_above':sec_above,
+        # NEW
+        'sar':sar_val,'sar_bullish':sar_bull,
+        'vi_plus':vi_plus,'vi_minus':vi_minus,'vortex_bullish':vortex_bull,
+        'rvi':rvi_val,'rvi_signal':rvi_sig,'rvi_bullish':rvi_bull,
+        'rs':round(rs[-1],6),
         'rs_kama':    round(rs_kama[-1], 6),
         'rs_above':   rs_above,
         'rs_kpct':    rs_kpct,
@@ -358,9 +412,11 @@ def update_portfolio(port_key, existing, candidates, cooldowns, today_str, regim
             'rs_trend':         cur['rs_trend'],
             'rs_baff':          cur['rs_baff'],
             'rs_kpct':          cur['rs_kpct'],
-            'rs_above':         cur['rs_above'],
-            'sec_above':        cur['sec_above'],
-            'warning':          None,
+            'rs_above':cur['rs_above'],'sec_above':cur['sec_above'],
+            'sar_bullish':cur.get('sar_bullish',True),
+            'vortex_bullish':cur.get('vortex_bullish',True),
+            'rvi_bullish':cur.get('rvi_bullish',True),
+            'warning':None,
         })
         kept.append(pos)
 
@@ -399,10 +455,11 @@ def update_portfolio(port_key, existing, candidates, cooldowns, today_str, regim
             'rs_trend':      c['rs_trend'],
             'rs_baff':       c['rs_baff'],
             'rs_kpct':       c['rs_kpct'],
-            'rs_above':      c['rs_above'],
-            'sec_above':     c['sec_above'],
-            'weight_pct':    0,
-            'warning':       None,
+            'rs_above':c['rs_above'],'sec_above':c['sec_above'],
+            'sar_bullish':c.get('sar_bullish',True),
+            'vortex_bullish':c.get('vortex_bullish',True),
+            'rvi_bullish':c.get('rvi_bullish',True),
+            'weight_pct':0,'warning':None,
         })
 
     # Weights by score
