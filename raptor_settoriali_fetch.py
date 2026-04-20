@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 """
 🦅 RAPTOR SETTORIALI — Autonomous Sector Portfolio Manager
-3 portfolios: EUROPA / USA / MONDO (SPDR ETFs)
-RS Line = Sector Price / Benchmark Price
-Signals based on RS Line KAMA + Trendycator + Baffetti
-VIX filter, cool-down 2 days, same sector allowed in multiple portfolios
-Runs hourly 09:00-19:00 CET Mon-Fri via GitHub Actions
+BUY1 / BUY2 / BUY3 / EXIT1 / EXIT2 / EXIT3
+VIX fallback: se non disponibile → regime NORMALE
 """
 
 import json, os
@@ -15,10 +12,6 @@ import yfinance as yf
 import pandas as pd
 
 ROME_TZ = pytz.timezone("Europe/Rome")
-
-# ─────────────────────────────────────────────────────────────────────────────
-# UNIVERSE
-# ─────────────────────────────────────────────────────────────────────────────
 
 PORTFOLIOS = {
     "europa": {
@@ -73,10 +66,17 @@ PORTFOLIOS = {
     }
 }
 
-XEON_TICKER = "XEON.MI"
-VIX_BLOCK   = 25.0   # above this → no new entries
-VIX_CAUTION = 20.0   # between this and VIX_BLOCK → only LONG_CONF
+XEON_TICKER   = "XEON.MI"
 COOLDOWN_DAYS = 2
+
+# MAX posizioni per regime
+MAX_POSITIONS = {
+    'CALMA':      5,
+    'NORMALE':    5,
+    'ATTENZIONE': 3,
+    'STRESS':     0,
+    'PAURA':      0,
+}
 
 # ─────────────────────────────────────────────────────────────────────────────
 # DATA FETCH
@@ -117,11 +117,14 @@ def fetch_vix():
     return vix, vstoxx
 
 def get_regime(vix, vstoxx):
-    avg = ((vix or 20) + (vstoxx or 20)) / 2
-    if avg < 15:   return 'CALMA'
-    if avg < 20:   return 'NORMALE'
-    if avg < 25:   return 'ATTENZIONE'
-    if avg < 30:   return 'STRESS'
+    # Fallback: se VIX non disponibile → NORMALE
+    if vix is None and vstoxx is None:
+        return 'NORMALE'
+    avg = ((vix or vstoxx or 20) + (vstoxx or vix or 20)) / 2
+    if avg < 15:  return 'CALMA'
+    if avg < 20:  return 'NORMALE'
+    if avg < 25:  return 'ATTENZIONE'
+    if avg < 30:  return 'STRESS'
     return 'PAURA'
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -163,7 +166,9 @@ def calc_ao(values):
     for i in range(len(series)-1, 0, -1):
         if series[i] > series[i-1]: baff += 1
         else: break
-    return round(ao_val, 6), baff
+    # AO miglioramento: crescente nelle ultime 2 barre
+    ao_improving = len(series) >= 2 and series[-1] > series[-2]
+    return round(ao_val, 6), baff, ao_improving
 
 def calc_rsi(p, n=14):
     if len(p) < n+1: return 50.0
@@ -190,6 +195,12 @@ def calc_cross_days(values, kama):
             return len(values)-1-i
     return 999
 
+def calc_kama_cross_up(values, kama, lookback=3):
+    """True se prezzo ha tagliato KAMA verso l'alto negli ultimi N giorni"""
+    for i in range(len(values)-1, max(0, len(values)-1-lookback), -1):
+        if values[i] > kama[i] and values[i-1] <= kama[i-1]:
+            return True
+    return False
 
 def calc_sar(high, low, af0=0.02, af_max=0.2):
     if len(high)<5: return low[-1], True
@@ -245,6 +256,72 @@ def calc_score_rs(er, baff, k_pct, p7, p30, ao_pos, trend):
     return round(s, 1)
 
 # ─────────────────────────────────────────────────────────────────────────────
+# CALCOLA SEGNALE BUY1/BUY2/BUY3/EXIT
+# ─────────────────────────────────────────────────────────────────────────────
+
+def calc_signal_buy(d, regime):
+    """
+    Ritorna (signal, qualifies, size)
+    signal: BUY1 / BUY2 / BUY3 / EXIT1 / EXIT2 / EXIT3 / WATCH / STOP
+    qualifies: True se va aperta una nuova posizione
+    """
+    sec_er   = d.get('sec_er', 0)
+    rs_er    = d.get('rs_er', 0)
+    score    = d.get('score', 0)
+    rs_baff  = d.get('rs_baff', 0)
+    sar_bull = d.get('sar_bullish', False)
+    vortex   = d.get('vortex_bullish', False)
+    sec_above= d.get('sec_above', False)
+    rs_above = d.get('rs_above', False)
+    rs_trend = d.get('rs_trend', 'GRIGIO')
+    rs_ao_pos= d.get('rs_ao_pos', False)
+    rs_ao_imp= d.get('rs_ao_improving', False)
+    kama_cross=d.get('kama_cross_up', False)
+    rs_kpct  = d.get('rs_kpct', 0)
+
+    blocked = regime in ('STRESS', 'PAURA')
+
+    # ── EXIT3 — uscita totale ──────────────────────────────────────
+    neg = sum([
+        not sec_above,
+        not rs_ao_pos,
+        sec_er < 0.3,
+        not rs_above and rs_kpct < -5,
+    ])
+    if score < 35 or neg >= 2:
+        return 'EXIT3', False, '0%'
+
+    # ── EXIT2 — uscita forte ───────────────────────────────────────
+    if score < 50 and sec_er < 0.5:
+        return 'EXIT2', False, '20-30%'
+
+    # ── EXIT1 — uscita parziale ────────────────────────────────────
+    if not sar_bull or (not rs_ao_pos and score < 65):
+        return 'EXIT1', False, '50-70%'
+
+    # ── BUY3 — full entry ──────────────────────────────────────────
+    if (score >= 80 and sec_er > 0.6 and rs_baff >= 3
+            and rs_above and rs_trend == 'VERDE'):
+        qualifies = not blocked and regime in ('CALMA', 'NORMALE', 'ATTENZIONE')
+        return 'BUY3', qualifies, '100%'
+
+    # ── BUY2 — confirmation ────────────────────────────────────────
+    if (sar_bull and rs_ao_pos and sec_above and score >= 65 and sec_er >= 0.5):
+        qualifies = not blocked and regime in ('CALMA', 'NORMALE', 'ATTENZIONE')
+        return 'BUY2', qualifies, '70%'
+
+    # ── BUY1 — early entry ─────────────────────────────────────────
+    if (sec_above and sec_er > 0.4 and sar_bull
+            and (kama_cross or rs_ao_imp)):
+        qualifies = not blocked and regime in ('CALMA', 'NORMALE')
+        return 'BUY1', qualifies, '30-40%'
+
+    # WATCH / STOP
+    if sec_above or sar_bull:
+        return 'WATCH', False, '—'
+    return 'STOP', False, '—'
+
+# ─────────────────────────────────────────────────────────────────────────────
 # ANALYZE ONE SECTOR
 # ─────────────────────────────────────────────────────────────────────────────
 
@@ -271,72 +348,70 @@ def analyze_sector(sector, bench_close, regime):
     rs = [s/b if b > 0 else 1.0 for s, b in zip(sec_c, ben_c)]
 
     # Indicators on RS Line
-    rs_kama  = calc_kama(rs)
-    rs_er    = calc_er(rs)
-    rs_trend = trendycator(rs)
-    rs_ao, rs_baff = calc_ao(rs)
-    rs_cross = calc_cross_days(rs, rs_kama)
-    rs_kpct  = round((rs[-1]/rs_kama[-1]-1)*100 if rs_kama[-1] else 0, 2)
-    rs_p7    = round((rs[-1]/rs[-8]-1)*100  if len(rs)>=8  else 0, 2)
-    rs_p30   = round((rs[-1]/rs[-31]-1)*100 if len(rs)>=31 else 0, 2)
-    rs_above = rs[-1] > rs_kama[-1]
-    rs_rsi   = calc_rsi(rs)
+    rs_kama   = calc_kama(rs)
+    rs_er     = calc_er(rs)
+    rs_trend  = trendycator(rs)
+    rs_ao_val, rs_baff, rs_ao_imp = calc_ao(rs)
+    rs_cross  = calc_cross_days(rs, rs_kama)
+    rs_kpct   = round((rs[-1]/rs_kama[-1]-1)*100 if rs_kama[-1] else 0, 2)
+    rs_p7     = round((rs[-1]/rs[-8]-1)*100  if len(rs)>=8  else 0, 2)
+    rs_p30    = round((rs[-1]/rs[-31]-1)*100 if len(rs)>=31 else 0, 2)
+    rs_above  = rs[-1] > rs_kama[-1]
+    rs_rsi    = calc_rsi(rs)
+    rs_ao_pos = rs_ao_val > 0
 
-    # Indicators on ETF price (absolute)
-    sec_kama  = calc_kama(sec_c)
-    sec_er    = calc_er(sec_c)
-    sec_above = sec_c[-1] > sec_kama[-1]
-    sec_trend = trendycator(sec_c)
+    # Indicators on ETF price
+    sec_kama   = calc_kama(sec_c)
+    sec_er     = calc_er(sec_c)
+    sec_above  = sec_c[-1] > sec_kama[-1]
+    sec_trend  = trendycator(sec_c)
+    kama_cross = calc_kama_cross_up(sec_c, sec_kama, lookback=3)
 
-    # SAR, Vortex, RVI on price
-    sar_val,sar_bull   = calc_sar(sec_h,sec_l)
-    vi_plus,vi_minus,vortex_bull = calc_vortex(sec_h,sec_l,sec_c)
-    rvi_val,rvi_sig,rvi_bull     = calc_rvi(sec_c,sec_o,sec_h,sec_l)
+    # SAR, Vortex, RVI
+    sar_val, sar_bull           = calc_sar(sec_h, sec_l)
+    vi_plus, vi_minus, vortex_bull = calc_vortex(sec_h, sec_l, sec_c)
+    rvi_val, rvi_sig, rvi_bull  = calc_rvi(sec_c, sec_o, sec_h, sec_l)
 
-    score = calc_score_rs(rs_er, rs_baff, rs_kpct, rs_p7, rs_p30, rs_ao > 0, rs_trend)
+    score = calc_score_rs(rs_er, rs_baff, rs_kpct, rs_p7, rs_p30, rs_ao_pos, rs_trend)
 
-    # Signal
-    signal = 'NEUTRO'
-    if rs_above and rs_trend == 'VERDE' and rs_baff >= 3 and sec_above and rs_cross <= 5:
-        if regime in ('CALMA', 'NORMALE'):
-            signal = 'LONG'
-        elif regime == 'ATTENZIONE':
-            signal = 'LONG_CONF'  # more selective
-        # STRESS/PAURA → no new entries
-    elif rs_above and rs_trend in ('VERDE','GRIGIO') and rs_baff >= 1 and sec_above:
-        signal = 'WATCH'
-    elif not rs_above or not sec_above:
-        signal = 'STOP' if (rs_trend == 'ROSSO' or sec_trend == 'ROSSO') else 'USCITA'
-
-    qualifies = signal in ('LONG',) and regime not in ('STRESS','PAURA')
-    if regime == 'ATTENZIONE' and signal == 'LONG_CONF':
-        qualifies = True
+    d = {
+        'ticker': ticker, 'label': label, 'name': name,
+        'sec_er': sec_er, 'rs_er': rs_er, 'score': score,
+        'rs_baff': rs_baff, 'sar_bullish': sar_bull, 'vortex_bullish': vortex_bull,
+        'sec_above': sec_above, 'rs_above': rs_above, 'rs_trend': rs_trend,
+        'rs_ao_pos': rs_ao_pos, 'rs_ao_improving': rs_ao_imp,
+        'kama_cross_up': kama_cross, 'rs_kpct': rs_kpct,
+    }
+    signal, qualifies, size = calc_signal_buy(d, regime)
 
     return {
-        'ticker':ticker,'label':label,'name':name,
-        'price':round(sec_c[-1],4),'sec_kama':round(sec_kama[-1],4),
-        'sec_above':sec_above,
-        # NEW
-        'sar':sar_val,'sar_bullish':sar_bull,
-        'vi_plus':vi_plus,'vi_minus':vi_minus,'vortex_bullish':vortex_bull,
-        'rvi':rvi_val,'rvi_signal':rvi_sig,'rvi_bullish':rvi_bull,
-        'rs':round(rs[-1],6),
-        'rs_kama':    round(rs_kama[-1], 6),
-        'rs_above':   rs_above,
-        'rs_kpct':    rs_kpct,
-        'rs_er':      rs_er,
-        'rs_baff':    rs_baff,
-        'rs_trend':   rs_trend,
-        'rs_cross':   rs_cross,
-        'rs_rsi':     rs_rsi,
-        'rs_p7':      rs_p7,
-        'rs_p30':     rs_p30,
-        'rs_ao_pos':  rs_ao > 0,
-        'sec_er':     sec_er,
-        'sec_trend':  sec_trend,
-        'score':      score,
-        'signal':     signal,
-        'qualifies':  qualifies,
+        'ticker': ticker, 'label': label, 'name': name,
+        'price': round(sec_c[-1], 4),
+        'sec_kama': round(sec_kama[-1], 4),
+        'sec_above': sec_above,
+        'sar': sar_val, 'sar_bullish': sar_bull,
+        'vi_plus': vi_plus, 'vi_minus': vi_minus, 'vortex_bullish': vortex_bull,
+        'rvi': rvi_val, 'rvi_signal': rvi_sig, 'rvi_bullish': rvi_bull,
+        'rs': round(rs[-1], 6),
+        'rs_kama': round(rs_kama[-1], 6),
+        'rs_above': rs_above,
+        'rs_kpct': rs_kpct,
+        'rs_er': rs_er,
+        'rs_baff': rs_baff,
+        'rs_trend': rs_trend,
+        'rs_cross': rs_cross,
+        'rs_rsi': rs_rsi,
+        'rs_p7': rs_p7,
+        'rs_p30': rs_p30,
+        'rs_ao_pos': rs_ao_pos,
+        'rs_ao_improving': rs_ao_imp,
+        'kama_cross_up': kama_cross,
+        'sec_er': sec_er,
+        'sec_trend': sec_trend,
+        'score': score,
+        'signal': signal,
+        'size': size,
+        'qualifies': qualifies,
     }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -354,19 +429,21 @@ def save_state(state):
     with open(STATE_FILE, 'w') as f: json.dump(state, f, indent=2, default=str)
 
 def update_portfolio(port_key, existing, candidates, cooldowns, today_str, regime):
-    today  = date.fromisoformat(today_str)
-    kept   = []
-    exited = []
+    today    = date.fromisoformat(today_str)
+    kept     = []
+    exited   = []
+    cand_map = {c['ticker']: c for c in candidates}
 
-    # Update cooldowns — remove expired
+    # Aggiorna cooldown — rimuove scaduti
     active_cd = {}
     for t, exit_date_str in cooldowns.items():
         exit_date = date.fromisoformat(exit_date_str)
         if (today - exit_date).days < COOLDOWN_DAYS:
             active_cd[t] = exit_date_str
 
+    # ── GESTIONE POSIZIONI APERTE ─────────────────────────────────
     for pos in existing:
-        cur = next((c for c in candidates if c['ticker'] == pos['ticker']), None)
+        cur = cand_map.get(pos['ticker'])
         if cur is None:
             pos['warning'] = 'Dati non disponibili'
             kept.append(pos)
@@ -375,29 +452,37 @@ def update_portfolio(port_key, existing, candidates, cooldowns, today_str, regim
         entry_date = date.fromisoformat(pos['entry_date'])
         days_held  = (today - entry_date).days
         cur_gain   = round((cur['price'] / pos['entry_price'] - 1) * 100, 2)
+        signal     = cur['signal']
 
         exit_reason = None
-        if not cur['rs_above']:
-            exit_reason = 'RS Line sotto KAMA RS'
-        elif not cur['sec_above']:
-            exit_reason = 'Prezzo ETF sotto KAMA'
+
+        # EXIT3 — uscita totale
+        if signal == 'EXIT3':
+            exit_reason = 'EXIT3 — Score < 35 o 2+ condizioni negative'
+        # EXIT2 — uscita forte (score cade molto)
+        elif signal == 'EXIT2':
+            prev_score = pos.get('score', 100)
+            if cur['score'] < prev_score - 10:
+                exit_reason = 'EXIT2 — Score -10pt e ER < 0.5'
+        # EXIT1b — time stop: dopo 7gg senza conferma BUY2/BUY3
+        elif days_held >= 7 and signal == 'BUY1':
+            exit_reason = f'EXIT1b — Time Stop: {days_held} giorni senza conferma'
+        # Time stop assoluto a 10 giorni
         elif days_held >= 10:
             exit_reason = f'Time Stop — {days_held} giorni'
-        elif cur['score'] < 15:
-            exit_reason = 'Score RS < 15'
 
         if exit_reason:
-            exited.append({**pos, 'exit_reason': exit_reason,
-                           'exit_price': cur['price'],
-                           'final_gain_pct': cur_gain,
-                           'exit_date': today_str})
-            # Start cooldown
+            exited.append({**pos,
+                'exit_reason': exit_reason,
+                'exit_price': cur['price'],
+                'final_gain_pct': cur_gain,
+                'exit_date': today_str})
             active_cd[pos['ticker']] = today_str
             continue
 
+        # Aggiorna dati posizione
         pre_alert  = days_held >= 7 and cur_gain < 5.0
         target_hit = cur_gain >= 5.0
-        pre_rs     = cur['rs_trend'] == 'ROSSO'
 
         pos.update({
             'current_price':    cur['price'],
@@ -405,67 +490,76 @@ def update_portfolio(port_key, existing, candidates, cooldowns, today_str, regim
             'days_held':        days_held,
             'pre_alert':        pre_alert,
             'target_hit':       target_hit,
-            'pre_rs_alert':     pre_rs,
-            'signal':           cur['signal'],
+            'pre_rs_alert':     cur['rs_trend'] == 'ROSSO',
+            'signal':           signal,
+            'size':             cur.get('size', '—'),
             'score':            cur['score'],
             'rs_er':            cur['rs_er'],
             'rs_trend':         cur['rs_trend'],
             'rs_baff':          cur['rs_baff'],
             'rs_kpct':          cur['rs_kpct'],
-            'rs_above':cur['rs_above'],'sec_above':cur['sec_above'],
-            'sar_bullish':cur.get('sar_bullish',True),
-            'vortex_bullish':cur.get('vortex_bullish',True),
-            'rvi_bullish':cur.get('rvi_bullish',True),
-            'warning':None,
+            'rs_above':         cur['rs_above'],
+            'sec_above':        cur['sec_above'],
+            'sec_er':           cur['sec_er'],
+            'sar_bullish':      cur.get('sar_bullish', True),
+            'vortex_bullish':   cur.get('vortex_bullish', True),
+            'rvi_bullish':      cur.get('rvi_bullish', True),
+            'warning':          None,
         })
         kept.append(pos)
 
-    # Fill empty slots — ranked by RS ER desc
-    slots = 5 - len(kept)
+    # ── APERTURA NUOVE POSIZIONI ──────────────────────────────────
+    max_pos = MAX_POSITIONS.get(regime, 0)
+    slots   = max_pos - len(kept)
     existing_tickers = {p['ticker'] for p in kept}
     blocked_tickers  = set(active_cd.keys())
 
+    # Candidati ordinati: prima BUY3, poi BUY2, poi BUY1 — per score desc
+    priority = {'BUY3': 0, 'BUY2': 1, 'BUY1': 2}
     new_q = sorted(
         [c for c in candidates
          if c['qualifies']
          and c['ticker'] not in existing_tickers
-         and c['ticker'] not in blocked_tickers
-         and regime not in ('STRESS', 'PAURA')],
-        key=lambda x: x['rs_er'], reverse=True
+         and c['ticker'] not in blocked_tickers],
+        key=lambda x: (priority.get(x['signal'], 9), -x['score'])
     )
 
     for c in new_q[:slots]:
-        ep   = c['price']
+        ep = c['price']
         kept.append({
-            'ticker':        c['ticker'],
-            'label':         c['label'],
-            'name':          c['name'],
-            'entry_date':    today_str,
-            'entry_price':   ep,
-            'current_price': ep,
-            'target_price':  round(ep * 1.05, 4),
+            'ticker':           c['ticker'],
+            'label':            c['label'],
+            'name':             c['name'],
+            'entry_date':       today_str,
+            'entry_price':      ep,
+            'current_price':    ep,
+            'target_price':     round(ep * 1.05, 4),
             'current_gain_pct': 0.0,
-            'days_held':     0,
-            'pre_alert':     False,
-            'target_hit':    False,
-            'pre_rs_alert':  False,
-            'signal':        c['signal'],
-            'score':         c['score'],
-            'rs_er':         c['rs_er'],
-            'rs_trend':      c['rs_trend'],
-            'rs_baff':       c['rs_baff'],
-            'rs_kpct':       c['rs_kpct'],
-            'rs_above':c['rs_above'],'sec_above':c['sec_above'],
-            'sar_bullish':c.get('sar_bullish',True),
-            'vortex_bullish':c.get('vortex_bullish',True),
-            'rvi_bullish':c.get('rvi_bullish',True),
-            'weight_pct':0,'warning':None,
+            'days_held':        0,
+            'pre_alert':        False,
+            'target_hit':       False,
+            'pre_rs_alert':     False,
+            'signal':           c['signal'],
+            'size':             c.get('size', '—'),
+            'score':            c['score'],
+            'rs_er':            c['rs_er'],
+            'rs_trend':         c['rs_trend'],
+            'rs_baff':          c['rs_baff'],
+            'rs_kpct':          c['rs_kpct'],
+            'rs_above':         c['rs_above'],
+            'sec_above':        c['sec_above'],
+            'sec_er':           c['sec_er'],
+            'sar_bullish':      c.get('sar_bullish', True),
+            'vortex_bullish':   c.get('vortex_bullish', True),
+            'rvi_bullish':      c.get('rvi_bullish', True),
+            'weight_pct':       0,
+            'warning':          None,
         })
 
-    # Weights by score
-    total_score = sum(p['score'] for p in kept)
+    # Pesi per score
+    total_score = sum(max(p['score'], 1) for p in kept)
     for p in kept:
-        p['weight_pct'] = round(p['score']/total_score*100, 1) if total_score else 0
+        p['weight_pct'] = round(max(p['score'], 1) / total_score * 100, 1) if total_score else 0
 
     return kept, exited, active_cd
 
@@ -478,11 +572,10 @@ def main():
     today_str = now.date().isoformat()
     print(f"🦅 RAPTOR SETTORIALI — {now.strftime('%d/%m/%Y %H:%M')} CET")
 
-    # VIX
     print("\n🌡️ VIX/VSTOXX...")
     vix, vstoxx = fetch_vix()
     regime = get_regime(vix, vstoxx)
-    print(f"   VIX={vix} VSTOXX={vstoxx} Regime={regime}")
+    print(f"   VIX={vix} VSTOXX={vstoxx} Regime={regime} (fallback NORMALE se null)")
 
     state = load_state()
     output_ports = {}
@@ -490,27 +583,23 @@ def main():
     for port_key, port_cfg in PORTFOLIOS.items():
         print(f"\n📊 {port_cfg['name']}...")
 
-        # Fetch benchmark
         print(f"  Benchmark {port_cfg['benchmark']['label']}...", end=' ', flush=True)
         bench = get_ohlcv(port_cfg['benchmark']['ticker'])
         if bench is None:
-            print("✗ SKIP")
-            continue
+            print("✗ SKIP"); continue
         bench_close = bench['close']
         print(f"✓ ({len(bench_close)} bars)")
 
-        # Analyze sectors
         sector_data = []
         for sec in port_cfg['sectors']:
             print(f"  {sec['label']}...", end=' ', flush=True)
             r = analyze_sector(sec, bench_close, regime)
             if r:
                 sector_data.append(r)
-                print(f"✓ score={r['score']} rs_er={r['rs_er']} signal={r['signal']}")
+                print(f"✓ score={r['score']} er={r['sec_er']} signal={r['signal']} qualifies={r['qualifies']}")
             else:
                 print("✗")
 
-        # Ensure state key exists
         if port_key not in state:
             state[port_key] = {'positions': [], 'history': [], 'cooldown': {}}
 
@@ -527,12 +616,15 @@ def main():
         state[port_key]['cooldown']  = cooldowns
         state[port_key].setdefault('history', []).extend(exited)
 
-        # Benchmark info
         bench_price = bench_close[-1]
         bench_p30   = round((bench_close[-1]/bench_close[-31]-1)*100 if len(bench_close)>=31 else 0, 2)
 
+        buy3 = [d for d in sector_data if d['signal'] == 'BUY3']
+        buy2 = [d for d in sector_data if d['signal'] == 'BUY2']
+        buy1 = [d for d in sector_data if d['signal'] == 'BUY1']
+
         output_ports[port_key] = {
-            'name':           port_cfg['name'],
+            'name':            port_cfg['name'],
             'benchmark_label': port_cfg['benchmark']['label'],
             'benchmark_price': round(bench_price, 4),
             'benchmark_p30':   bench_p30,
@@ -543,11 +635,13 @@ def main():
             'watchlist':       sorted([d for d in sector_data if not d['qualifies']], key=lambda x: x['score'], reverse=True)[:8],
             'qualified':       [d for d in sector_data if d['qualifies']],
             'all':             sorted(sector_data, key=lambda x: x['score'], reverse=True),
+            'buy3_count':      len(buy3),
+            'buy2_count':      len(buy2),
+            'buy1_count':      len(buy1),
         }
 
-        print(f"   → {len(positions)} posizioni {'| XEON' if not positions else ''} | {len(cooldowns)} in cooldown")
+        print(f"   → {len(positions)} pos | BUY3={len(buy3)} BUY2={len(buy2)} BUY1={len(buy1)} | {len(cooldowns)} CD")
 
-    # XEON
     print("\n💰 XEON...")
     xeon = get_ohlcv(XEON_TICKER)
     xeon_price = round(xeon['close'][-1], 4) if xeon else None
@@ -568,7 +662,7 @@ def main():
     with open('settoriali.json', 'w') as f:
         json.dump(output, f, indent=2, default=str)
 
-    print(f"\n✅ settoriali.json aggiornato — {now.strftime('%d/%m/%Y %H:%M CET')}")
+    print(f"\n✅ settoriali.json — {now.strftime('%d/%m/%Y %H:%M CET')}")
     for k, p in output_ports.items():
         print(f"   {p['name']}: {len(p['positions'])} pos {'| XEON' if p['use_xeon'] else ''}")
 
