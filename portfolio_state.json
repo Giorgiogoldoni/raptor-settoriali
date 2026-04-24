@@ -136,7 +136,6 @@
       }
     ],
     "cooldown": {
-      "STZX.MI": "2026-04-22",
       "STKX.MI": "2026-04-23",
       "STPX.MI": "2026-04-23"
     }
@@ -149,23 +148,23 @@
         "name": "SPDR S&P US Technology",
         "entry_date": "2026-04-20",
         "entry_price": 136.21,
-        "current_price": 139.45,
+        "current_price": 139.09,
         "target_price": 143.0205,
-        "current_gain_pct": 2.38,
-        "days_held": 3,
+        "current_gain_pct": 2.11,
+        "days_held": 4,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "BUY3",
         "size": "100%",
-        "score": 113.5,
-        "rs_er": 0.9386,
+        "score": 104.9,
+        "rs_er": 0.9231,
         "rs_trend": "VERDE",
-        "rs_baff": 14,
-        "rs_kpct": 0.91,
+        "rs_baff": 15,
+        "rs_kpct": 0.55,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.9216,
+        "sec_er": 0.8611,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": true,
@@ -236,9 +235,7 @@
         "exit_date": "2026-04-22"
       }
     ],
-    "cooldown": {
-      "SXLY.MI": "2026-04-22"
-    }
+    "cooldown": {}
   },
   "mondo": {
     "positions": [
@@ -248,23 +245,23 @@
         "name": "SPDR MSCI Wld Technology",
         "entry_date": "2026-04-20",
         "entry_price": 196.24,
-        "current_price": 200.87,
+        "current_price": 200.12,
         "target_price": 206.052,
-        "current_gain_pct": 2.36,
-        "days_held": 3,
+        "current_gain_pct": 1.98,
+        "days_held": 4,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "BUY3",
         "size": "100%",
-        "score": 120.1,
-        "rs_er": 1.0,
+        "score": 111.3,
+        "rs_er": 0.9796,
         "rs_trend": "VERDE",
-        "rs_baff": 13,
-        "rs_kpct": 0.95,
+        "rs_baff": 14,
+        "rs_kpct": 0.51,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.9692,
+        "sec_er": 0.8876,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": true,
@@ -368,8 +365,6 @@
         "exit_date": "2026-04-22"
       }
     ],
-    "cooldown": {
-      "WCOD.MI": "2026-04-22"
-    }
+    "cooldown": {}
   }
 }
