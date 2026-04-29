@@ -173,37 +173,7 @@
     }
   },
   "usa": {
-    "positions": [
-      {
-        "ticker": "SXLK.MI",
-        "label": "SXLK",
-        "name": "SPDR S&P US Technology",
-        "entry_date": "2026-04-20",
-        "entry_price": 136.21,
-        "current_price": 138.77,
-        "target_price": 143.0205,
-        "current_gain_pct": 1.88,
-        "days_held": 8,
-        "pre_alert": true,
-        "target_hit": false,
-        "pre_rs_alert": false,
-        "signal": "WATCH",
-        "size": "\u2014",
-        "score": 39.8,
-        "rs_er": 0.5902,
-        "rs_trend": "VERDE",
-        "rs_baff": 0,
-        "rs_kpct": -0.25,
-        "rs_above": false,
-        "sec_above": false,
-        "sec_er": 0.649,
-        "sar_bullish": true,
-        "vortex_bullish": true,
-        "rvi_bullish": false,
-        "weight_pct": 100.0,
-        "warning": null
-      }
-    ],
+    "positions": [],
     "history": [
       {
         "ticker": "SXLI.MI",
@@ -265,42 +235,47 @@
         "exit_price": 62.98,
         "final_gain_pct": -1.02,
         "exit_date": "2026-04-22"
-      }
-    ],
-    "cooldown": {}
-  },
-  "mondo": {
-    "positions": [
+      },
       {
-        "ticker": "WTEC.MI",
-        "label": "WTEC",
-        "name": "SPDR MSCI Wld Technology",
+        "ticker": "SXLK.MI",
+        "label": "SXLK",
+        "name": "SPDR S&P US Technology",
         "entry_date": "2026-04-20",
-        "entry_price": 196.24,
-        "current_price": 199.23,
-        "target_price": 206.052,
-        "current_gain_pct": 1.52,
+        "entry_price": 136.21,
+        "current_price": 138.77,
+        "target_price": 143.0205,
+        "current_gain_pct": 1.88,
         "days_held": 8,
         "pre_alert": true,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "WATCH",
         "size": "\u2014",
-        "score": 96.3,
-        "rs_er": 0.686,
+        "score": 39.8,
+        "rs_er": 0.5902,
         "rs_trend": "VERDE",
-        "rs_baff": 16,
-        "rs_kpct": -0.29,
+        "rs_baff": 0,
+        "rs_kpct": -0.25,
         "rs_above": false,
         "sec_above": false,
-        "sec_er": 0.66,
+        "sec_er": 0.649,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": false,
         "weight_pct": 100.0,
-        "warning": null
+        "warning": null,
+        "exit_reason": "EXIT1b \u2014 Time Stop: 9 giorni senza conferma",
+        "exit_price": 140.47,
+        "final_gain_pct": 3.13,
+        "exit_date": "2026-04-29"
       }
     ],
+    "cooldown": {
+      "SXLK.MI": "2026-04-29"
+    }
+  },
+  "mondo": {
+    "positions": [],
     "history": [
       {
         "ticker": "WIND.MI",
@@ -395,8 +370,43 @@
         "exit_price": 73.43,
         "final_gain_pct": -1.06,
         "exit_date": "2026-04-22"
+      },
+      {
+        "ticker": "WTEC.MI",
+        "label": "WTEC",
+        "name": "SPDR MSCI Wld Technology",
+        "entry_date": "2026-04-20",
+        "entry_price": 196.24,
+        "current_price": 199.23,
+        "target_price": 206.052,
+        "current_gain_pct": 1.52,
+        "days_held": 8,
+        "pre_alert": true,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "WATCH",
+        "size": "\u2014",
+        "score": 96.3,
+        "rs_er": 0.686,
+        "rs_trend": "VERDE",
+        "rs_baff": 16,
+        "rs_kpct": -0.29,
+        "rs_above": false,
+        "sec_above": false,
+        "sec_er": 0.66,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": false,
+        "weight_pct": 100.0,
+        "warning": null,
+        "exit_reason": "EXIT1b \u2014 Time Stop: 9 giorni senza conferma",
+        "exit_price": 201.46,
+        "final_gain_pct": 2.66,
+        "exit_date": "2026-04-29"
       }
     ],
-    "cooldown": {}
+    "cooldown": {
+      "WTEC.MI": "2026-04-29"
+    }
   }
 }
