@@ -168,9 +168,7 @@
         "exit_date": "2026-04-28"
       }
     ],
-    "cooldown": {
-      "STKX.MI": "2026-04-28"
-    }
+    "cooldown": {}
   },
   "usa": {
     "positions": [],
