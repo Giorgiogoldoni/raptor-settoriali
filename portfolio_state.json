@@ -268,9 +268,7 @@
         "exit_date": "2026-04-29"
       }
     ],
-    "cooldown": {
-      "SXLK.MI": "2026-04-29"
-    }
+    "cooldown": {}
   },
   "mondo": {
     "positions": [],
@@ -403,8 +401,6 @@
         "exit_date": "2026-04-29"
       }
     ],
-    "cooldown": {
-      "WTEC.MI": "2026-04-29"
-    }
+    "cooldown": {}
   }
 }
