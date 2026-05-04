@@ -1,6 +1,36 @@
 {
   "europa": {
-    "positions": [],
+    "positions": [
+      {
+        "ticker": "STNX.MI",
+        "label": "STNX",
+        "name": "SPDR MSCI Eu Energy",
+        "entry_date": "2026-05-04",
+        "entry_price": 292.25,
+        "current_price": 292.25,
+        "target_price": 306.8625,
+        "current_gain_pct": 0.0,
+        "days_held": 0,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY1",
+        "size": "30-40%",
+        "score": 70.2,
+        "rs_er": 0.9332,
+        "rs_trend": "VERDE",
+        "rs_baff": 6,
+        "rs_kpct": 0.1,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.7849,
+        "sar_bullish": true,
+        "vortex_bullish": false,
+        "rvi_bullish": true,
+        "weight_pct": 100.0,
+        "warning": null
+      }
+    ],
     "history": [
       {
         "ticker": "STQX.MI",
