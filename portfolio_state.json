@@ -7,23 +7,23 @@
         "name": "SPDR MSCI Eu Technology",
         "entry_date": "2026-05-05",
         "entry_price": 182.6,
-        "current_price": 187.28,
+        "current_price": 185.68,
         "target_price": 191.73,
-        "current_gain_pct": 2.56,
-        "days_held": 2,
+        "current_gain_pct": 1.69,
+        "days_held": 3,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
-        "signal": "BUY2",
-        "size": "70%",
-        "score": 101.5,
-        "rs_er": 0.5957,
+        "signal": "BUY1",
+        "size": "30-40%",
+        "score": 103.7,
+        "rs_er": 0.5658,
         "rs_trend": "VERDE",
-        "rs_baff": 6,
-        "rs_kpct": 2.89,
+        "rs_baff": 7,
+        "rs_kpct": 2.24,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.5053,
+        "sec_er": 0.4137,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": true,
@@ -231,9 +231,7 @@
         "exit_date": "2026-05-06"
       }
     ],
-    "cooldown": {
-      "STNX.MI": "2026-05-06"
-    }
+    "cooldown": {}
   },
   "usa": {
     "positions": [
@@ -243,26 +241,26 @@
         "name": "SPDR S&P US Technology",
         "entry_date": "2026-05-06",
         "entry_price": 144.68,
-        "current_price": 148.0,
+        "current_price": 147.95,
         "target_price": 151.914,
-        "current_gain_pct": 2.29,
-        "days_held": 1,
+        "current_gain_pct": 2.26,
+        "days_held": 2,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
-        "signal": "BUY1",
-        "size": "30-40%",
-        "score": 64.3,
-        "rs_er": 0.3976,
+        "signal": "BUY2",
+        "size": "70%",
+        "score": 71.9,
+        "rs_er": 0.3928,
         "rs_trend": "VERDE",
-        "rs_baff": 2,
-        "rs_kpct": 2.68,
+        "rs_baff": 3,
+        "rs_kpct": 2.39,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.5613,
+        "sec_er": 0.5421,
         "sar_bullish": true,
         "vortex_bullish": true,
-        "rvi_bullish": false,
+        "rvi_bullish": true,
         "weight_pct": 100.0,
         "warning": null
       }
@@ -373,26 +371,26 @@
         "name": "SPDR MSCI Wld Technology",
         "entry_date": "2026-05-05",
         "entry_price": 205.98,
-        "current_price": 212.77,
+        "current_price": 212.39,
         "target_price": 216.279,
-        "current_gain_pct": 3.3,
-        "days_held": 2,
+        "current_gain_pct": 3.11,
+        "days_held": 3,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "BUY2",
         "size": "70%",
-        "score": 68.0,
-        "rs_er": 0.4267,
+        "score": 74.2,
+        "rs_er": 0.4027,
         "rs_trend": "VERDE",
-        "rs_baff": 2,
-        "rs_kpct": 2.79,
+        "rs_baff": 3,
+        "rs_kpct": 2.41,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.5844,
+        "sec_er": 0.5424,
         "sar_bullish": true,
         "vortex_bullish": true,
-        "rvi_bullish": false,
+        "rvi_bullish": true,
         "weight_pct": 100.0,
         "warning": null
       }
@@ -559,8 +557,6 @@
         "exit_date": "2026-05-06"
       }
     ],
-    "cooldown": {
-      "WNRG.MI": "2026-05-06"
-    }
+    "cooldown": {}
   }
 }
