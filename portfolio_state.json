@@ -7,23 +7,23 @@
         "name": "SPDR MSCI Eu Technology",
         "entry_date": "2026-05-14",
         "entry_price": 194.34,
-        "current_price": 190.72,
+        "current_price": 194.84,
         "target_price": 204.057,
-        "current_gain_pct": -1.86,
-        "days_held": 5,
+        "current_gain_pct": 0.26,
+        "days_held": 6,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "EXIT2",
         "size": "20-30%",
-        "score": 40.5,
-        "rs_er": 0.1506,
+        "score": 49.5,
+        "rs_er": 0.2614,
         "rs_trend": "VERDE",
-        "rs_baff": 1,
-        "rs_kpct": 0.57,
+        "rs_baff": 0,
+        "rs_kpct": 2.34,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.1664,
+        "sec_er": 0.1574,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": false,
@@ -297,9 +297,7 @@
         "exit_date": "2026-05-18"
       }
     ],
-    "cooldown": {
-      "STPX.MI": "2026-05-18"
-    }
+    "cooldown": {}
   },
   "usa": {
     "positions": [],
@@ -432,9 +430,7 @@
         "exit_date": "2026-05-18"
       }
     ],
-    "cooldown": {
-      "SXLK.MI": "2026-05-18"
-    }
+    "cooldown": {}
   },
   "mondo": {
     "positions": [],
@@ -666,8 +662,6 @@
         "exit_date": "2026-05-18"
       }
     ],
-    "cooldown": {
-      "WTEC.MI": "2026-05-18"
-    }
+    "cooldown": {}
   }
 }
