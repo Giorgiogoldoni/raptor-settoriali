@@ -1,65 +1,6 @@
 {
   "europa": {
-    "positions": [
-      {
-        "ticker": "STKX.MI",
-        "label": "STKX",
-        "name": "SPDR MSCI Eu Technology",
-        "entry_date": "2026-05-14",
-        "entry_price": 194.34,
-        "current_price": 206.95,
-        "target_price": 204.057,
-        "current_gain_pct": 6.49,
-        "days_held": 8,
-        "pre_alert": false,
-        "target_hit": true,
-        "pre_rs_alert": false,
-        "signal": "WATCH",
-        "size": "\u2014",
-        "score": 72.8,
-        "rs_er": 0.3772,
-        "rs_trend": "VERDE",
-        "rs_baff": 1,
-        "rs_kpct": 5.65,
-        "rs_above": true,
-        "sec_above": true,
-        "sec_er": 0.3858,
-        "sar_bullish": true,
-        "vortex_bullish": true,
-        "rvi_bullish": true,
-        "weight_pct": 51.4,
-        "warning": null
-      },
-      {
-        "ticker": "STTX.MI",
-        "label": "STTX",
-        "name": "SPDR MSCI Eu Comm Services",
-        "entry_date": "2026-05-22",
-        "entry_price": 78.42,
-        "current_price": 78.42,
-        "target_price": 82.341,
-        "current_gain_pct": 0.0,
-        "days_held": 0,
-        "pre_alert": false,
-        "target_hit": false,
-        "pre_rs_alert": false,
-        "signal": "BUY2",
-        "size": "70%",
-        "score": 68.9,
-        "rs_er": 0.3625,
-        "rs_trend": "GRIGIO",
-        "rs_baff": 11,
-        "rs_kpct": 0.19,
-        "rs_above": true,
-        "sec_above": true,
-        "sec_er": 0.5785,
-        "sar_bullish": true,
-        "vortex_bullish": true,
-        "rvi_bullish": true,
-        "weight_pct": 48.6,
-        "warning": null
-      }
-    ],
+    "positions": [],
     "history": [
       {
         "ticker": "STQX.MI",
@@ -357,10 +298,77 @@
         "exit_price": 290.2,
         "final_gain_pct": 0.02,
         "exit_date": "2026-05-22"
+      },
+      {
+        "ticker": "STKX.MI",
+        "label": "STKX",
+        "name": "SPDR MSCI Eu Technology",
+        "entry_date": "2026-05-14",
+        "entry_price": 194.34,
+        "current_price": 206.95,
+        "target_price": 204.057,
+        "current_gain_pct": 6.49,
+        "days_held": 8,
+        "pre_alert": false,
+        "target_hit": true,
+        "pre_rs_alert": false,
+        "signal": "WATCH",
+        "size": "\u2014",
+        "score": 72.8,
+        "rs_er": 0.3772,
+        "rs_trend": "VERDE",
+        "rs_baff": 1,
+        "rs_kpct": 5.65,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.3858,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": true,
+        "weight_pct": 51.4,
+        "warning": null,
+        "exit_reason": "Time Stop \u2014 11 giorni",
+        "exit_price": 209.1,
+        "final_gain_pct": 7.59,
+        "exit_date": "2026-05-25"
+      },
+      {
+        "ticker": "STTX.MI",
+        "label": "STTX",
+        "name": "SPDR MSCI Eu Comm Services",
+        "entry_date": "2026-05-22",
+        "entry_price": 78.42,
+        "current_price": 78.42,
+        "target_price": 82.341,
+        "current_gain_pct": 0.0,
+        "days_held": 0,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY2",
+        "size": "70%",
+        "score": 68.9,
+        "rs_er": 0.3625,
+        "rs_trend": "GRIGIO",
+        "rs_baff": 11,
+        "rs_kpct": 0.19,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.5785,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": true,
+        "weight_pct": 48.6,
+        "warning": null,
+        "exit_reason": "EXIT3 \u2014 Score < 35 o 2+ condizioni negative",
+        "exit_price": 78.42,
+        "final_gain_pct": 0.0,
+        "exit_date": "2026-05-25"
       }
     ],
     "cooldown": {
-      "STNX.MI": "2026-05-22"
+      "STKX.MI": "2026-05-25",
+      "STTX.MI": "2026-05-25"
     }
   },
   "usa": {
@@ -527,9 +535,7 @@
         "exit_date": "2026-05-22"
       }
     ],
-    "cooldown": {
-      "SXLE.MI": "2026-05-22"
-    }
+    "cooldown": {}
   },
   "mondo": {
     "positions": [],
@@ -794,8 +800,6 @@
         "exit_date": "2026-05-22"
       }
     ],
-    "cooldown": {
-      "WNRG.MI": "2026-05-22"
-    }
+    "cooldown": {}
   }
 }
