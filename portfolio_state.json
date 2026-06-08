@@ -564,10 +564,7 @@
         "exit_date": "2026-06-04"
       }
     ],
-    "cooldown": {
-      "STKX.MI": "2026-06-04",
-      "STPX.MI": "2026-06-04"
-    }
+    "cooldown": {}
   },
   "usa": {
     "positions": [],
@@ -799,9 +796,7 @@
         "exit_date": "2026-06-04"
       }
     ],
-    "cooldown": {
-      "SXLK.MI": "2026-06-04"
-    }
+    "cooldown": {}
   },
   "mondo": {
     "positions": [],
@@ -1099,8 +1094,6 @@
         "exit_date": "2026-06-04"
       }
     ],
-    "cooldown": {
-      "WTEC.MI": "2026-06-04"
-    }
+    "cooldown": {}
   }
 }
