@@ -567,7 +567,37 @@
     "cooldown": {}
   },
   "usa": {
-    "positions": [],
+    "positions": [
+      {
+        "ticker": "SXLF.MI",
+        "label": "SXLF",
+        "name": "SPDR S&P US Financials",
+        "entry_date": "2026-06-11",
+        "entry_price": 54.08,
+        "current_price": 54.08,
+        "target_price": 56.784,
+        "current_gain_pct": 0.0,
+        "days_held": 0,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY1",
+        "size": "30-40%",
+        "score": 81.5,
+        "rs_er": 0.5975,
+        "rs_trend": "GRIGIO",
+        "rs_baff": 6,
+        "rs_kpct": 3.7,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.4621,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": true,
+        "weight_pct": 100.0,
+        "warning": null
+      }
+    ],
     "history": [
       {
         "ticker": "SXLI.MI",
