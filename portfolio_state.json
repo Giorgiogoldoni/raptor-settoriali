@@ -1,6 +1,36 @@
 {
   "europa": {
-    "positions": [],
+    "positions": [
+      {
+        "ticker": "STZX.MI",
+        "label": "STZX",
+        "name": "SPDR MSCI Eu Financials",
+        "entry_date": "2026-06-17",
+        "entry_price": 149.86,
+        "current_price": 149.86,
+        "target_price": 157.353,
+        "current_gain_pct": 0.0,
+        "days_held": 0,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY1",
+        "size": "30-40%",
+        "score": 64.3,
+        "rs_er": 0.5617,
+        "rs_trend": "VERDE",
+        "rs_baff": 4,
+        "rs_kpct": 1.88,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.732,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": true,
+        "weight_pct": 100.0,
+        "warning": null
+      }
+    ],
     "history": [
       {
         "ticker": "STQX.MI",
@@ -609,23 +639,23 @@
         "name": "SPDR S&P US Materials",
         "entry_date": "2026-06-15",
         "entry_price": 45.13,
-        "current_price": 45.14,
+        "current_price": 45.23,
         "target_price": 47.3865,
-        "current_gain_pct": 0.02,
-        "days_held": 1,
+        "current_gain_pct": 0.22,
+        "days_held": 2,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "WATCH",
         "size": "\u2014",
-        "score": 80.5,
-        "rs_er": 0.4261,
+        "score": 83.8,
+        "rs_er": 0.3449,
         "rs_trend": "GRIGIO",
-        "rs_baff": 18,
-        "rs_kpct": 1.75,
+        "rs_baff": 19,
+        "rs_kpct": 1.96,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.3052,
+        "sec_er": 0.2244,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": true,
@@ -994,7 +1024,6 @@
       }
     ],
     "cooldown": {
-      "SXLP.MI": "2026-06-15",
       "SXLF.MI": "2026-06-16",
       "SXLI.MI": "2026-06-16"
     }
@@ -1010,17 +1039,17 @@
         "current_price": 84.68,
         "target_price": 86.898,
         "current_gain_pct": 2.32,
-        "days_held": 4,
+        "days_held": 5,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "BUY2",
         "size": "70%",
-        "score": 90.7,
-        "rs_er": 0.7408,
+        "score": 87.1,
+        "rs_er": 0.57,
         "rs_trend": "GRIGIO",
         "rs_baff": 9,
-        "rs_kpct": 1.38,
+        "rs_kpct": 1.93,
         "rs_above": true,
         "sec_above": true,
         "sec_er": 0.9101,
@@ -1358,8 +1387,6 @@
         "exit_date": "2026-06-15"
       }
     ],
-    "cooldown": {
-      "WCOS.MI": "2026-06-15"
-    }
+    "cooldown": {}
   }
 }
