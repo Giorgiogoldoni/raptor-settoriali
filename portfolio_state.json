@@ -1,36 +1,6 @@
 {
   "europa": {
-    "positions": [
-      {
-        "ticker": "DFSV.DE",
-        "label": "DFSV",
-        "name": "SPDR S&P Eu Defence",
-        "entry_date": "2026-07-07",
-        "entry_price": 10.656,
-        "current_price": 10.04,
-        "target_price": 11.1888,
-        "current_gain_pct": -5.78,
-        "days_held": 1,
-        "pre_alert": false,
-        "target_hit": false,
-        "pre_rs_alert": false,
-        "signal": "WATCH",
-        "size": "\u2014",
-        "score": 67.7,
-        "rs_er": 0.3921,
-        "rs_trend": "GRIGIO",
-        "rs_baff": 6,
-        "rs_kpct": 2.0,
-        "rs_above": true,
-        "sec_above": true,
-        "sec_er": 0.3166,
-        "sar_bullish": true,
-        "vortex_bullish": true,
-        "rvi_bullish": false,
-        "weight_pct": 100.0,
-        "warning": null
-      }
-    ],
+    "positions": [],
     "history": [
       {
         "ticker": "STQX.MI",
@@ -790,73 +760,48 @@
         "exit_price": 152.4,
         "final_gain_pct": -2.61,
         "exit_date": "2026-07-08"
-      }
-    ],
-    "cooldown": {
-      "STZX.MI": "2026-07-08"
-    }
-  },
-  "usa": {
-    "positions": [
+      },
       {
-        "ticker": "SXLF.MI",
-        "label": "SXLF",
-        "name": "SPDR S&P US Financials",
-        "entry_date": "2026-07-03",
-        "entry_price": 57.37,
-        "current_price": 57.46,
-        "target_price": 60.2385,
-        "current_gain_pct": 0.16,
-        "days_held": 5,
+        "ticker": "DFSV.DE",
+        "label": "DFSV",
+        "name": "SPDR S&P Eu Defence",
+        "entry_date": "2026-07-07",
+        "entry_price": 10.656,
+        "current_price": 10.04,
+        "target_price": 11.1888,
+        "current_gain_pct": -5.78,
+        "days_held": 1,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "WATCH",
         "size": "\u2014",
-        "score": 65.8,
-        "rs_er": 0.2116,
-        "rs_trend": "VERDE",
-        "rs_baff": 4,
-        "rs_kpct": 2.6,
+        "score": 67.7,
+        "rs_er": 0.3921,
+        "rs_trend": "GRIGIO",
+        "rs_baff": 6,
+        "rs_kpct": 2.0,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.207,
+        "sec_er": 0.3166,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": false,
-        "weight_pct": 50.7,
-        "warning": null
-      },
-      {
-        "ticker": "SXLV.MI",
-        "label": "SXLV",
-        "name": "SPDR S&P US Health Care",
-        "entry_date": "2026-07-08",
-        "entry_price": 44.785,
-        "current_price": 44.565,
-        "target_price": 47.0242,
-        "current_gain_pct": -0.49,
-        "days_held": 0,
-        "pre_alert": false,
-        "target_hit": false,
-        "pre_rs_alert": false,
-        "signal": "BUY1",
-        "size": "30-40%",
-        "score": 64.0,
-        "rs_er": 0.3974,
-        "rs_trend": "VERDE",
-        "rs_baff": 2,
-        "rs_kpct": 3.37,
-        "rs_above": true,
-        "sec_above": true,
-        "sec_er": 0.5233,
-        "sar_bullish": true,
-        "vortex_bullish": true,
-        "rvi_bullish": false,
-        "weight_pct": 49.3,
-        "warning": null
+        "weight_pct": 100.0,
+        "warning": null,
+        "exit_reason": "EXIT3 \u2014 Score < 35 o 2+ condizioni negative",
+        "exit_price": 9.983,
+        "final_gain_pct": -6.32,
+        "exit_date": "2026-07-09"
       }
     ],
+    "cooldown": {
+      "STZX.MI": "2026-07-08",
+      "DFSV.DE": "2026-07-09"
+    }
+  },
+  "usa": {
+    "positions": [],
     "history": [
       {
         "ticker": "SXLI.MI",
@@ -1446,42 +1391,81 @@
         "exit_price": 44.595,
         "final_gain_pct": 4.54,
         "exit_date": "2026-07-06"
-      }
-    ],
-    "cooldown": {}
-  },
-  "mondo": {
-    "positions": [
+      },
       {
-        "ticker": "WHEA.MI",
-        "label": "WHEA",
-        "name": "SPDR MSCI Wld Health Care",
+        "ticker": "SXLF.MI",
+        "label": "SXLF",
+        "name": "SPDR S&P US Financials",
+        "entry_date": "2026-07-03",
+        "entry_price": 57.37,
+        "current_price": 57.46,
+        "target_price": 60.2385,
+        "current_gain_pct": 0.16,
+        "days_held": 5,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "WATCH",
+        "size": "\u2014",
+        "score": 65.8,
+        "rs_er": 0.2116,
+        "rs_trend": "VERDE",
+        "rs_baff": 4,
+        "rs_kpct": 2.6,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.207,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": false,
+        "weight_pct": 50.7,
+        "warning": null,
+        "exit_reason": "EXIT2 \u2014 Score -10pt e ER < 0.5",
+        "exit_price": 57.19,
+        "final_gain_pct": -0.31,
+        "exit_date": "2026-07-09"
+      },
+      {
+        "ticker": "SXLV.MI",
+        "label": "SXLV",
+        "name": "SPDR S&P US Health Care",
         "entry_date": "2026-07-08",
-        "entry_price": 61.94,
-        "current_price": 61.8,
-        "target_price": 65.037,
-        "current_gain_pct": -0.23,
+        "entry_price": 44.785,
+        "current_price": 44.565,
+        "target_price": 47.0242,
+        "current_gain_pct": -0.49,
         "days_held": 0,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "BUY1",
         "size": "30-40%",
-        "score": 58.2,
-        "rs_er": 0.3913,
+        "score": 64.0,
+        "rs_er": 0.3974,
         "rs_trend": "VERDE",
         "rs_baff": 2,
-        "rs_kpct": 2.93,
+        "rs_kpct": 3.37,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.5129,
+        "sec_er": 0.5233,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": false,
-        "weight_pct": 100.0,
-        "warning": null
+        "weight_pct": 49.3,
+        "warning": null,
+        "exit_reason": "EXIT2 \u2014 Score -10pt e ER < 0.5",
+        "exit_price": 44.025,
+        "final_gain_pct": -1.7,
+        "exit_date": "2026-07-09"
       }
     ],
+    "cooldown": {
+      "SXLF.MI": "2026-07-09",
+      "SXLV.MI": "2026-07-09"
+    }
+  },
+  "mondo": {
+    "positions": [],
     "history": [
       {
         "ticker": "WIND.MI",
@@ -2038,10 +2022,44 @@
         "exit_price": 87.5,
         "final_gain_pct": -0.52,
         "exit_date": "2026-07-08"
+      },
+      {
+        "ticker": "WHEA.MI",
+        "label": "WHEA",
+        "name": "SPDR MSCI Wld Health Care",
+        "entry_date": "2026-07-08",
+        "entry_price": 61.94,
+        "current_price": 61.8,
+        "target_price": 65.037,
+        "current_gain_pct": -0.23,
+        "days_held": 0,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY1",
+        "size": "30-40%",
+        "score": 58.2,
+        "rs_er": 0.3913,
+        "rs_trend": "VERDE",
+        "rs_baff": 2,
+        "rs_kpct": 2.93,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.5129,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": false,
+        "weight_pct": 100.0,
+        "warning": null,
+        "exit_reason": "EXIT3 \u2014 Score < 35 o 2+ condizioni negative",
+        "exit_price": 61.14,
+        "final_gain_pct": -1.29,
+        "exit_date": "2026-07-09"
       }
     ],
     "cooldown": {
-      "WFIN.MI": "2026-07-08"
+      "WFIN.MI": "2026-07-08",
+      "WHEA.MI": "2026-07-09"
     }
   }
 }
