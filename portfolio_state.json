@@ -1,6 +1,36 @@
 {
   "europa": {
-    "positions": [],
+    "positions": [
+      {
+        "ticker": "STNX.MI",
+        "label": "STNX",
+        "name": "SPDR MSCI Eu Energy",
+        "entry_date": "2026-07-13",
+        "entry_price": 269.6,
+        "current_price": 269.6,
+        "target_price": 283.08,
+        "current_gain_pct": 0.0,
+        "days_held": 0,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY1",
+        "size": "30-40%",
+        "score": 66.6,
+        "rs_er": 0.3696,
+        "rs_trend": "GRIGIO",
+        "rs_baff": 8,
+        "rs_kpct": 4.28,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.4515,
+        "sar_bullish": true,
+        "vortex_bullish": false,
+        "rvi_bullish": true,
+        "weight_pct": 100.0,
+        "warning": null
+      }
+    ],
     "history": [
       {
         "ticker": "STQX.MI",
@@ -795,9 +825,7 @@
         "exit_date": "2026-07-09"
       }
     ],
-    "cooldown": {
-      "DFSV.DE": "2026-07-09"
-    }
+    "cooldown": {}
   },
   "usa": {
     "positions": [],
@@ -1458,10 +1486,7 @@
         "exit_date": "2026-07-09"
       }
     ],
-    "cooldown": {
-      "SXLF.MI": "2026-07-09",
-      "SXLV.MI": "2026-07-09"
-    }
+    "cooldown": {}
   },
   "mondo": {
     "positions": [],
@@ -2056,8 +2081,6 @@
         "exit_date": "2026-07-09"
       }
     ],
-    "cooldown": {
-      "WHEA.MI": "2026-07-09"
-    }
+    "cooldown": {}
   }
 }
