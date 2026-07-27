@@ -1,6 +1,36 @@
 {
   "europa": {
-    "positions": [],
+    "positions": [
+      {
+        "ticker": "DFSV.DE",
+        "label": "DFSV",
+        "name": "SPDR S&P Eu Defence",
+        "entry_date": "2026-07-27",
+        "entry_price": 10.28,
+        "current_price": 10.28,
+        "target_price": 10.794,
+        "current_gain_pct": 0.0,
+        "days_held": 0,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY2",
+        "size": "70%",
+        "score": 86.3,
+        "rs_er": 0.4139,
+        "rs_trend": "GRIGIO",
+        "rs_baff": 7,
+        "rs_kpct": 2.63,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.6994,
+        "sar_bullish": true,
+        "vortex_bullish": false,
+        "rvi_bullish": true,
+        "weight_pct": 100.0,
+        "warning": null
+      }
+    ],
     "history": [
       {
         "ticker": "STQX.MI",
@@ -894,43 +924,10 @@
         "exit_date": "2026-07-23"
       }
     ],
-    "cooldown": {
-      "STNX.MI": "2026-07-23",
-      "STZX.MI": "2026-07-23"
-    }
+    "cooldown": {}
   },
   "usa": {
-    "positions": [
-      {
-        "ticker": "SXLE.MI",
-        "label": "SXLE",
-        "name": "SPDR S&P US Energy",
-        "entry_date": "2026-07-20",
-        "entry_price": 40.69,
-        "current_price": 42.375,
-        "target_price": 42.7245,
-        "current_gain_pct": 4.14,
-        "days_held": 4,
-        "pre_alert": false,
-        "target_hit": false,
-        "pre_rs_alert": false,
-        "signal": "BUY2",
-        "size": "70%",
-        "score": 99.8,
-        "rs_er": 0.6567,
-        "rs_trend": "GRIGIO",
-        "rs_baff": 7,
-        "rs_kpct": 3.84,
-        "rs_above": true,
-        "sec_above": true,
-        "sec_er": 0.708,
-        "sar_bullish": true,
-        "vortex_bullish": true,
-        "rvi_bullish": true,
-        "weight_pct": 100.0,
-        "warning": null
-      }
-    ],
+    "positions": [],
     "history": [
       {
         "ticker": "SXLI.MI",
@@ -1718,42 +1715,47 @@
         "exit_price": 58.27,
         "final_gain_pct": -1.32,
         "exit_date": "2026-07-21"
-      }
-    ],
-    "cooldown": {}
-  },
-  "mondo": {
-    "positions": [
+      },
       {
-        "ticker": "WNRG.MI",
-        "label": "WNRG",
-        "name": "SPDR MSCI Wld Energy",
-        "entry_date": "2026-07-17",
-        "entry_price": 62.23,
-        "current_price": 65.75,
-        "target_price": 65.3415,
-        "current_gain_pct": 5.66,
-        "days_held": 7,
+        "ticker": "SXLE.MI",
+        "label": "SXLE",
+        "name": "SPDR S&P US Energy",
+        "entry_date": "2026-07-20",
+        "entry_price": 40.69,
+        "current_price": 42.375,
+        "target_price": 42.7245,
+        "current_gain_pct": 4.14,
+        "days_held": 4,
         "pre_alert": false,
-        "target_hit": true,
+        "target_hit": false,
         "pre_rs_alert": false,
         "signal": "BUY2",
         "size": "70%",
-        "score": 96.7,
-        "rs_er": 0.6649,
+        "score": 99.8,
+        "rs_er": 0.6567,
         "rs_trend": "GRIGIO",
         "rs_baff": 7,
-        "rs_kpct": 3.33,
+        "rs_kpct": 3.84,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.7601,
+        "sec_er": 0.708,
         "sar_bullish": true,
         "vortex_bullish": true,
-        "rvi_bullish": false,
+        "rvi_bullish": true,
         "weight_pct": 100.0,
-        "warning": null
+        "warning": null,
+        "exit_reason": "EXIT2 \u2014 Score -10pt e ER < 0.5",
+        "exit_price": 41.06,
+        "final_gain_pct": 0.91,
+        "exit_date": "2026-07-27"
       }
     ],
+    "cooldown": {
+      "SXLE.MI": "2026-07-27"
+    }
+  },
+  "mondo": {
+    "positions": [],
     "history": [
       {
         "ticker": "WIND.MI",
@@ -2475,10 +2477,43 @@
         "exit_price": 75.45,
         "final_gain_pct": 0.0,
         "exit_date": "2026-07-24"
+      },
+      {
+        "ticker": "WNRG.MI",
+        "label": "WNRG",
+        "name": "SPDR MSCI Wld Energy",
+        "entry_date": "2026-07-17",
+        "entry_price": 62.23,
+        "current_price": 65.75,
+        "target_price": 65.3415,
+        "current_gain_pct": 5.66,
+        "days_held": 7,
+        "pre_alert": false,
+        "target_hit": true,
+        "pre_rs_alert": false,
+        "signal": "BUY2",
+        "size": "70%",
+        "score": 96.7,
+        "rs_er": 0.6649,
+        "rs_trend": "GRIGIO",
+        "rs_baff": 7,
+        "rs_kpct": 3.33,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.7601,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": false,
+        "weight_pct": 100.0,
+        "warning": null,
+        "exit_reason": "EXIT3 \u2014 Score < 35 o 2+ condizioni negative",
+        "exit_price": 63.8,
+        "final_gain_pct": 2.52,
+        "exit_date": "2026-07-27"
       }
     ],
     "cooldown": {
-      "WCOD.MI": "2026-07-24"
+      "WNRG.MI": "2026-07-27"
     }
   }
 }
