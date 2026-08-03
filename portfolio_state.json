@@ -7,27 +7,27 @@
         "name": "SPDR S&P Eu Defence",
         "entry_date": "2026-07-27",
         "entry_price": 10.28,
-        "current_price": 10.538,
+        "current_price": 10.732,
         "target_price": 10.794,
-        "current_gain_pct": 2.51,
-        "days_held": 4,
-        "pre_alert": false,
+        "current_gain_pct": 4.4,
+        "days_held": 7,
+        "pre_alert": true,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "BUY2",
         "size": "70%",
-        "score": 111.3,
-        "rs_er": 0.642,
+        "score": 117.1,
+        "rs_er": 0.6644,
         "rs_trend": "GRIGIO",
-        "rs_baff": 11,
-        "rs_kpct": 2.86,
+        "rs_baff": 12,
+        "rs_kpct": 3.31,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.8846,
+        "sec_er": 0.9004,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": false,
-        "weight_pct": 49.1,
+        "weight_pct": 49.8,
         "warning": null
       },
       {
@@ -39,24 +39,24 @@
         "current_price": 76.13,
         "target_price": 81.1755,
         "current_gain_pct": -1.53,
-        "days_held": 1,
+        "days_held": 4,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
-        "signal": "WATCH",
-        "size": "\u2014",
-        "score": 51.4,
-        "rs_er": 0.1535,
+        "signal": "EXIT2",
+        "size": "20-30%",
+        "score": 46.5,
+        "rs_er": 0.0641,
         "rs_trend": "GRIGIO",
-        "rs_baff": 4,
-        "rs_kpct": 3.16,
+        "rs_baff": 5,
+        "rs_kpct": 2.64,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.2806,
+        "sec_er": 0.2278,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": true,
-        "weight_pct": 22.7,
+        "weight_pct": 19.8,
         "warning": null
       },
       {
@@ -65,27 +65,27 @@
         "name": "SPDR MSCI Eu Industrials",
         "entry_date": "2026-07-31",
         "entry_price": 455.0,
-        "current_price": 449.45,
+        "current_price": 453.65,
         "target_price": 477.75,
-        "current_gain_pct": -1.22,
-        "days_held": 0,
+        "current_gain_pct": -0.3,
+        "days_held": 3,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
-        "signal": "EXIT1",
-        "size": "50-70%",
-        "score": 63.8,
-        "rs_er": 0.6662,
+        "signal": "BUY1",
+        "size": "30-40%",
+        "score": 71.5,
+        "rs_er": 0.7164,
         "rs_trend": "GRIGIO",
-        "rs_baff": 7,
-        "rs_kpct": 0.9,
+        "rs_baff": 8,
+        "rs_kpct": 1.02,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.4785,
+        "sec_er": 0.5857,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": false,
-        "weight_pct": 28.2,
+        "weight_pct": 30.4,
         "warning": null
       }
     ],
@@ -1048,10 +1048,7 @@
         "exit_date": "2026-07-30"
       }
     ],
-    "cooldown": {
-      "STNX.MI": "2026-07-30",
-      "STWX.MI": "2026-07-30"
-    }
+    "cooldown": {}
   },
   "usa": {
     "positions": [],
@@ -2042,13 +2039,7 @@
         "exit_date": "2026-07-30"
       }
     ],
-    "cooldown": {
-      "SXLE.MI": "2026-07-30",
-      "SXLV.MI": "2026-07-30",
-      "SXLF.MI": "2026-07-30",
-      "SXLP.MI": "2026-07-30",
-      "SXLB.MI": "2026-07-30"
-    }
+    "cooldown": {}
   },
   "mondo": {
     "positions": [],
@@ -2973,11 +2964,6 @@
         "exit_date": "2026-07-31"
       }
     ],
-    "cooldown": {
-      "WHEA.MI": "2026-07-30",
-      "WNRG.MI": "2026-07-30",
-      "WFIN.MI": "2026-07-31",
-      "WCOS.MI": "2026-07-31"
-    }
+    "cooldown": {}
   }
 }
