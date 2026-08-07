@@ -16,11 +16,11 @@
         "pre_rs_alert": false,
         "signal": "BUY1",
         "size": "30-40%",
-        "score": 58.5,
-        "rs_er": 0.2938,
+        "score": 53.9,
+        "rs_er": 0.2465,
         "rs_trend": "GRIGIO",
         "rs_baff": 6,
-        "rs_kpct": 1.08,
+        "rs_kpct": 0.76,
         "rs_above": true,
         "sec_above": true,
         "sec_er": 0.7706,
@@ -1162,37 +1162,7 @@
     }
   },
   "usa": {
-    "positions": [
-      {
-        "ticker": "SXLY.MI",
-        "label": "SXLY",
-        "name": "SPDR S&P US Cons Disc",
-        "entry_date": "2026-08-06",
-        "entry_price": 64.34,
-        "current_price": 64.46,
-        "target_price": 67.557,
-        "current_gain_pct": 0.19,
-        "days_held": 1,
-        "pre_alert": false,
-        "target_hit": false,
-        "pre_rs_alert": false,
-        "signal": "BUY1",
-        "size": "30-40%",
-        "score": 60.3,
-        "rs_er": 0.5029,
-        "rs_trend": "GRIGIO",
-        "rs_baff": 6,
-        "rs_kpct": 0.01,
-        "rs_above": true,
-        "sec_above": true,
-        "sec_er": 0.7056,
-        "sar_bullish": true,
-        "vortex_bullish": false,
-        "rvi_bullish": true,
-        "weight_pct": 100.0,
-        "warning": null
-      }
-    ],
+    "positions": [],
     "history": [
       {
         "ticker": "SXLI.MI",
@@ -2178,9 +2148,44 @@
         "exit_price": 44.27,
         "final_gain_pct": -2.72,
         "exit_date": "2026-07-30"
+      },
+      {
+        "ticker": "SXLY.MI",
+        "label": "SXLY",
+        "name": "SPDR S&P US Cons Disc",
+        "entry_date": "2026-08-06",
+        "entry_price": 64.34,
+        "current_price": 64.46,
+        "target_price": 67.557,
+        "current_gain_pct": 0.19,
+        "days_held": 1,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY1",
+        "size": "30-40%",
+        "score": 60.3,
+        "rs_er": 0.5029,
+        "rs_trend": "GRIGIO",
+        "rs_baff": 6,
+        "rs_kpct": 0.01,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.7056,
+        "sar_bullish": true,
+        "vortex_bullish": false,
+        "rvi_bullish": true,
+        "weight_pct": 100.0,
+        "warning": null,
+        "exit_reason": "EXIT3 \u2014 Score < 35 o 2+ condizioni negative",
+        "exit_price": 64.38,
+        "final_gain_pct": 0.06,
+        "exit_date": "2026-08-07"
       }
     ],
-    "cooldown": {}
+    "cooldown": {
+      "SXLY.MI": "2026-08-07"
+    }
   },
   "mondo": {
     "positions": [],
