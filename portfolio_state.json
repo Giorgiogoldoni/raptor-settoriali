@@ -1,36 +1,6 @@
 {
   "europa": {
-    "positions": [
-      {
-        "ticker": "STNX.MI",
-        "label": "STNX",
-        "name": "SPDR MSCI Eu Energy",
-        "entry_date": "2026-09-09",
-        "entry_price": 311.2,
-        "current_price": 314.8,
-        "target_price": 326.76,
-        "current_gain_pct": 1.16,
-        "days_held": 8,
-        "pre_alert": true,
-        "target_hit": false,
-        "pre_rs_alert": false,
-        "signal": "WATCH",
-        "size": "\u2014",
-        "score": 54.8,
-        "rs_er": 0.2454,
-        "rs_trend": "VERDE",
-        "rs_baff": 0,
-        "rs_kpct": 1.11,
-        "rs_above": true,
-        "sec_above": true,
-        "sec_er": 0.3254,
-        "sar_bullish": true,
-        "vortex_bullish": true,
-        "rvi_bullish": true,
-        "weight_pct": 100.0,
-        "warning": null
-      }
-    ],
+    "positions": [],
     "history": [
       {
         "ticker": "STQX.MI",
@@ -1582,9 +1552,44 @@
         "exit_price": 385.35,
         "final_gain_pct": -4.02,
         "exit_date": "2026-09-10"
+      },
+      {
+        "ticker": "STNX.MI",
+        "label": "STNX",
+        "name": "SPDR MSCI Eu Energy",
+        "entry_date": "2026-09-09",
+        "entry_price": 311.2,
+        "current_price": 314.8,
+        "target_price": 326.76,
+        "current_gain_pct": 1.16,
+        "days_held": 8,
+        "pre_alert": true,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "WATCH",
+        "size": "\u2014",
+        "score": 54.8,
+        "rs_er": 0.2454,
+        "rs_trend": "VERDE",
+        "rs_baff": 0,
+        "rs_kpct": 1.11,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.3254,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": true,
+        "weight_pct": 100.0,
+        "warning": null,
+        "exit_reason": "EXIT3 \u2014 Score < 35 o 2+ condizioni negative",
+        "exit_price": 311.45,
+        "final_gain_pct": 0.08,
+        "exit_date": "2026-09-18"
       }
     ],
-    "cooldown": {}
+    "cooldown": {
+      "STNX.MI": "2026-09-18"
+    }
   },
   "usa": {
     "positions": [],
@@ -2911,37 +2916,7 @@
     }
   },
   "mondo": {
-    "positions": [
-      {
-        "ticker": "WTEL.MI",
-        "label": "WTEL",
-        "name": "SPDR MSCI Wld Comm Services",
-        "entry_date": "2026-09-08",
-        "entry_price": 70.48,
-        "current_price": 73.25,
-        "target_price": 74.004,
-        "current_gain_pct": 3.93,
-        "days_held": 9,
-        "pre_alert": true,
-        "target_hit": false,
-        "pre_rs_alert": false,
-        "signal": "BUY2",
-        "size": "70%",
-        "score": 100.1,
-        "rs_er": 0.6227,
-        "rs_trend": "GRIGIO",
-        "rs_baff": 15,
-        "rs_kpct": 1.05,
-        "rs_above": true,
-        "sec_above": true,
-        "sec_er": 0.9541,
-        "sar_bullish": true,
-        "vortex_bullish": true,
-        "rvi_bullish": true,
-        "weight_pct": 100.0,
-        "warning": null
-      }
-    ],
+    "positions": [],
     "history": [
       {
         "ticker": "WIND.MI",
@@ -4257,10 +4232,44 @@
         "exit_price": 69.03,
         "final_gain_pct": -0.63,
         "exit_date": "2026-09-17"
+      },
+      {
+        "ticker": "WTEL.MI",
+        "label": "WTEL",
+        "name": "SPDR MSCI Wld Comm Services",
+        "entry_date": "2026-09-08",
+        "entry_price": 70.48,
+        "current_price": 73.25,
+        "target_price": 74.004,
+        "current_gain_pct": 3.93,
+        "days_held": 9,
+        "pre_alert": true,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY2",
+        "size": "70%",
+        "score": 100.1,
+        "rs_er": 0.6227,
+        "rs_trend": "GRIGIO",
+        "rs_baff": 15,
+        "rs_kpct": 1.05,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.9541,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": true,
+        "weight_pct": 100.0,
+        "warning": null,
+        "exit_reason": "Time Stop \u2014 10 giorni",
+        "exit_price": 73.26,
+        "final_gain_pct": 3.94,
+        "exit_date": "2026-09-18"
       }
     ],
     "cooldown": {
-      "WNRG.MI": "2026-09-17"
+      "WNRG.MI": "2026-09-17",
+      "WTEL.MI": "2026-09-18"
     }
   }
 }
