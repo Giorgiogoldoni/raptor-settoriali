@@ -1587,9 +1587,7 @@
         "exit_date": "2026-09-18"
       }
     ],
-    "cooldown": {
-      "STNX.MI": "2026-09-18"
-    }
+    "cooldown": {}
   },
   "usa": {
     "positions": [],
@@ -2910,10 +2908,7 @@
         "exit_date": "2026-09-17"
       }
     ],
-    "cooldown": {
-      "SXLE.MI": "2026-09-17",
-      "SXLC.MI": "2026-09-17"
-    }
+    "cooldown": {}
   },
   "mondo": {
     "positions": [],
@@ -4267,9 +4262,6 @@
         "exit_date": "2026-09-18"
       }
     ],
-    "cooldown": {
-      "WNRG.MI": "2026-09-17",
-      "WTEL.MI": "2026-09-18"
-    }
+    "cooldown": {}
   }
 }
