@@ -1590,7 +1590,37 @@
     "cooldown": {}
   },
   "usa": {
-    "positions": [],
+    "positions": [
+      {
+        "ticker": "SXLK.MI",
+        "label": "SXLK",
+        "name": "SPDR S&P US Technology",
+        "entry_date": "2026-09-22",
+        "entry_price": 171.54,
+        "current_price": 171.54,
+        "target_price": 180.117,
+        "current_gain_pct": 0.0,
+        "days_held": 0,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY1",
+        "size": "30-40%",
+        "score": 50.3,
+        "rs_er": 0.4965,
+        "rs_trend": "VERDE",
+        "rs_baff": 1,
+        "rs_kpct": 2.48,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.4825,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": true,
+        "weight_pct": 100.0,
+        "warning": null
+      }
+    ],
     "history": [
       {
         "ticker": "SXLI.MI",
@@ -2911,7 +2941,37 @@
     "cooldown": {}
   },
   "mondo": {
-    "positions": [],
+    "positions": [
+      {
+        "ticker": "WTEC.MI",
+        "label": "WTEC",
+        "name": "SPDR MSCI Wld Technology",
+        "entry_date": "2026-09-22",
+        "entry_price": 247.51,
+        "current_price": 247.51,
+        "target_price": 259.8855,
+        "current_gain_pct": 0.0,
+        "days_held": 0,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY1",
+        "size": "30-40%",
+        "score": 54.9,
+        "rs_er": 0.4962,
+        "rs_trend": "VERDE",
+        "rs_baff": 1,
+        "rs_kpct": 3.09,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.4328,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": true,
+        "weight_pct": 100.0,
+        "warning": null
+      }
+    ],
     "history": [
       {
         "ticker": "WIND.MI",
