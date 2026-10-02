@@ -7,23 +7,23 @@
         "name": "SPDR MSCI Eu Technology",
         "entry_date": "2026-09-28",
         "entry_price": 205.45,
-        "current_price": 212.05,
+        "current_price": 216.95,
         "target_price": 215.7225,
-        "current_gain_pct": 3.21,
-        "days_held": 3,
+        "current_gain_pct": 5.6,
+        "days_held": 4,
         "pre_alert": false,
-        "target_hit": false,
+        "target_hit": true,
         "pre_rs_alert": false,
         "signal": "BUY3",
         "size": "100%",
-        "score": 114.8,
-        "rs_er": 0.7481,
+        "score": 126.4,
+        "rs_er": 0.7737,
         "rs_trend": "VERDE",
-        "rs_baff": 8,
-        "rs_kpct": 3.96,
+        "rs_baff": 9,
+        "rs_kpct": 4.4,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.6413,
+        "sec_er": 0.6498,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": true,
@@ -1650,42 +1650,10 @@
         "exit_date": "2026-09-30"
       }
     ],
-    "cooldown": {
-      "STQX.MI": "2026-09-30"
-    }
+    "cooldown": {}
   },
   "usa": {
-    "positions": [
-      {
-        "ticker": "SXLK.MI",
-        "label": "SXLK",
-        "name": "SPDR S&P US Technology",
-        "entry_date": "2026-09-22",
-        "entry_price": 171.54,
-        "current_price": 174.66,
-        "target_price": 180.117,
-        "current_gain_pct": 1.82,
-        "days_held": 9,
-        "pre_alert": true,
-        "target_hit": false,
-        "pre_rs_alert": false,
-        "signal": "BUY3",
-        "size": "100%",
-        "score": 98.0,
-        "rs_er": 0.8009,
-        "rs_trend": "VERDE",
-        "rs_baff": 8,
-        "rs_kpct": 1.51,
-        "rs_above": true,
-        "sec_above": true,
-        "sec_er": 0.7527,
-        "sar_bullish": true,
-        "vortex_bullish": true,
-        "rvi_bullish": false,
-        "weight_pct": 100.0,
-        "warning": null
-      }
-    ],
+    "positions": [],
     "history": [
       {
         "ticker": "SXLI.MI",
@@ -3001,42 +2969,47 @@
         "exit_price": 47.145,
         "final_gain_pct": -1.13,
         "exit_date": "2026-09-17"
-      }
-    ],
-    "cooldown": {}
-  },
-  "mondo": {
-    "positions": [
+      },
       {
-        "ticker": "WTEC.MI",
-        "label": "WTEC",
-        "name": "SPDR MSCI Wld Technology",
+        "ticker": "SXLK.MI",
+        "label": "SXLK",
+        "name": "SPDR S&P US Technology",
         "entry_date": "2026-09-22",
-        "entry_price": 247.51,
-        "current_price": 252.48,
-        "target_price": 259.8855,
-        "current_gain_pct": 2.01,
+        "entry_price": 171.54,
+        "current_price": 174.66,
+        "target_price": 180.117,
+        "current_gain_pct": 1.82,
         "days_held": 9,
         "pre_alert": true,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "BUY3",
         "size": "100%",
-        "score": 105.3,
-        "rs_er": 0.8399,
+        "score": 98.0,
+        "rs_er": 0.8009,
         "rs_trend": "VERDE",
         "rs_baff": 8,
-        "rs_kpct": 1.86,
+        "rs_kpct": 1.51,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.731,
+        "sec_er": 0.7527,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": false,
         "weight_pct": 100.0,
-        "warning": null
+        "warning": null,
+        "exit_reason": "Time Stop \u2014 10 giorni",
+        "exit_price": 178.38,
+        "final_gain_pct": 3.99,
+        "exit_date": "2026-10-02"
       }
     ],
+    "cooldown": {
+      "SXLK.MI": "2026-10-02"
+    }
+  },
+  "mondo": {
+    "positions": [],
     "history": [
       {
         "ticker": "WIND.MI",
@@ -4385,8 +4358,43 @@
         "exit_price": 73.26,
         "final_gain_pct": 3.94,
         "exit_date": "2026-09-18"
+      },
+      {
+        "ticker": "WTEC.MI",
+        "label": "WTEC",
+        "name": "SPDR MSCI Wld Technology",
+        "entry_date": "2026-09-22",
+        "entry_price": 247.51,
+        "current_price": 252.48,
+        "target_price": 259.8855,
+        "current_gain_pct": 2.01,
+        "days_held": 9,
+        "pre_alert": true,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY3",
+        "size": "100%",
+        "score": 105.3,
+        "rs_er": 0.8399,
+        "rs_trend": "VERDE",
+        "rs_baff": 8,
+        "rs_kpct": 1.86,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.731,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": false,
+        "weight_pct": 100.0,
+        "warning": null,
+        "exit_reason": "Time Stop \u2014 10 giorni",
+        "exit_price": 258.07,
+        "final_gain_pct": 4.27,
+        "exit_date": "2026-10-02"
       }
     ],
-    "cooldown": {}
+    "cooldown": {
+      "WTEC.MI": "2026-10-02"
+    }
   }
 }
