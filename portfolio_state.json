@@ -1,6 +1,36 @@
 {
   "europa": {
-    "positions": [],
+    "positions": [
+      {
+        "ticker": "STUX.MI",
+        "label": "STUX",
+        "name": "SPDR MSCI Eu Utilities",
+        "entry_date": "2026-10-12",
+        "entry_price": 256.5,
+        "current_price": 256.5,
+        "target_price": 269.325,
+        "current_gain_pct": 0.0,
+        "days_held": 0,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY2",
+        "size": "70%",
+        "score": 92.6,
+        "rs_er": 0.7469,
+        "rs_trend": "GRIGIO",
+        "rs_baff": 9,
+        "rs_kpct": 1.84,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.5131,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": true,
+        "weight_pct": 100.0,
+        "warning": null
+      }
+    ],
     "history": [
       {
         "ticker": "STQX.MI",
@@ -1653,9 +1683,7 @@
         "exit_date": "2026-10-08"
       }
     ],
-    "cooldown": {
-      "STKX.MI": "2026-10-08"
-    }
+    "cooldown": {}
   },
   "usa": {
     "positions": [
@@ -1665,27 +1693,56 @@
         "name": "SPDR S&P US Energy",
         "entry_date": "2026-10-09",
         "entry_price": 47.575,
-        "current_price": 47.785,
+        "current_price": 48.04,
         "target_price": 49.9538,
-        "current_gain_pct": 0.44,
+        "current_gain_pct": 0.98,
+        "days_held": 3,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY2",
+        "size": "70%",
+        "score": 79.4,
+        "rs_er": 0.4055,
+        "rs_trend": "VERDE",
+        "rs_baff": 7,
+        "rs_kpct": 2.36,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.738,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": false,
+        "weight_pct": 50.8,
+        "warning": null
+      },
+      {
+        "ticker": "SXLU.MI",
+        "label": "SXLU",
+        "name": "SPDR S&P US Utilities",
+        "entry_date": "2026-10-12",
+        "entry_price": 47.365,
+        "current_price": 47.365,
+        "target_price": 49.7333,
+        "current_gain_pct": 0.0,
         "days_held": 0,
         "pre_alert": false,
         "target_hit": false,
         "pre_rs_alert": false,
         "signal": "BUY1",
         "size": "30-40%",
-        "score": 71.8,
-        "rs_er": 0.1881,
-        "rs_trend": "VERDE",
-        "rs_baff": 5,
-        "rs_kpct": 2.77,
+        "score": 76.9,
+        "rs_er": 0.6834,
+        "rs_trend": "GRIGIO",
+        "rs_baff": 9,
+        "rs_kpct": 1.91,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 0.4597,
+        "sec_er": 0.8184,
         "sar_bullish": true,
         "vortex_bullish": true,
         "rvi_bullish": true,
-        "weight_pct": 100.0,
+        "weight_pct": 49.2,
         "warning": null
       }
     ],
@@ -3072,12 +3129,40 @@
         "exit_date": "2026-10-09"
       }
     ],
-    "cooldown": {
-      "SXLK.MI": "2026-10-09"
-    }
+    "cooldown": {}
   },
   "mondo": {
-    "positions": [],
+    "positions": [
+      {
+        "ticker": "WNRG.MI",
+        "label": "WNRG",
+        "name": "SPDR MSCI Wld Energy",
+        "entry_date": "2026-10-12",
+        "entry_price": 72.47,
+        "current_price": 72.47,
+        "target_price": 76.0935,
+        "current_gain_pct": 0.0,
+        "days_held": 0,
+        "pre_alert": false,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "BUY2",
+        "size": "70%",
+        "score": 68.5,
+        "rs_er": 0.3452,
+        "rs_trend": "VERDE",
+        "rs_baff": 5,
+        "rs_kpct": 2.38,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 0.6441,
+        "sar_bullish": true,
+        "vortex_bullish": true,
+        "rvi_bullish": false,
+        "weight_pct": 100.0,
+        "warning": null
+      }
+    ],
     "history": [
       {
         "ticker": "WIND.MI",
@@ -4494,8 +4579,6 @@
         "exit_date": "2026-10-09"
       }
     ],
-    "cooldown": {
-      "WTEC.MI": "2026-10-09"
-    }
+    "cooldown": {}
   }
 }
