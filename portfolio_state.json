@@ -2217,37 +2217,7 @@
     "cooldown": {}
   },
   "usa": {
-    "positions": [
-      {
-        "ticker": "SXLU.MI",
-        "label": "SXLU",
-        "name": "SPDR S&P US Utilities",
-        "entry_date": "2026-11-17",
-        "entry_price": 50.97,
-        "current_price": 50.97,
-        "target_price": 53.5185,
-        "current_gain_pct": 0.0,
-        "days_held": 9,
-        "pre_alert": true,
-        "target_hit": false,
-        "pre_rs_alert": false,
-        "signal": "EXIT1",
-        "size": "50-70%",
-        "score": 59.2,
-        "rs_er": 0.2652,
-        "rs_trend": "VERDE",
-        "rs_baff": 2,
-        "rs_kpct": 3.57,
-        "rs_above": true,
-        "sec_above": true,
-        "sec_er": 0.1299,
-        "sar_bullish": false,
-        "vortex_bullish": true,
-        "rvi_bullish": false,
-        "weight_pct": 100.0,
-        "warning": null
-      }
-    ],
+    "positions": [],
     "history": [
       {
         "ticker": "SXLI.MI",
@@ -4223,42 +4193,47 @@
         "exit_price": 66.01,
         "final_gain_pct": -4.15,
         "exit_date": "2026-11-20"
-      }
-    ],
-    "cooldown": {}
-  },
-  "mondo": {
-    "positions": [
+      },
       {
-        "ticker": "WCOD.MI",
-        "label": "WCOD",
-        "name": "SPDR MSCI Wld Cons Disc",
-        "entry_date": "2026-11-19",
-        "entry_price": 78.54,
-        "current_price": 78.54,
-        "target_price": 82.467,
+        "ticker": "SXLU.MI",
+        "label": "SXLU",
+        "name": "SPDR S&P US Utilities",
+        "entry_date": "2026-11-17",
+        "entry_price": 50.97,
+        "current_price": 50.97,
+        "target_price": 53.5185,
         "current_gain_pct": 0.0,
-        "days_held": 7,
+        "days_held": 9,
         "pre_alert": true,
         "target_hit": false,
         "pre_rs_alert": false,
-        "signal": "WATCH",
-        "size": "\u2014",
-        "score": 49.1,
-        "rs_er": 0.4168,
+        "signal": "EXIT1",
+        "size": "50-70%",
+        "score": 59.2,
+        "rs_er": 0.2652,
         "rs_trend": "VERDE",
-        "rs_baff": 0,
-        "rs_kpct": 2.37,
+        "rs_baff": 2,
+        "rs_kpct": 3.57,
         "rs_above": true,
         "sec_above": true,
-        "sec_er": 1.0,
-        "sar_bullish": true,
-        "vortex_bullish": false,
+        "sec_er": 0.1299,
+        "sar_bullish": false,
+        "vortex_bullish": true,
         "rvi_bullish": false,
         "weight_pct": 100.0,
-        "warning": null
+        "warning": null,
+        "exit_reason": "EXIT2 \u2014 Score -10pt e ER < 0.5",
+        "exit_price": 50.79,
+        "final_gain_pct": -0.35,
+        "exit_date": "2026-11-27"
       }
     ],
+    "cooldown": {
+      "SXLU.MI": "2026-11-27"
+    }
+  },
+  "mondo": {
+    "positions": [],
     "history": [
       {
         "ticker": "WIND.MI",
@@ -6201,10 +6176,44 @@
         "exit_price": 54.56,
         "final_gain_pct": -0.31,
         "exit_date": "2026-11-26"
+      },
+      {
+        "ticker": "WCOD.MI",
+        "label": "WCOD",
+        "name": "SPDR MSCI Wld Cons Disc",
+        "entry_date": "2026-11-19",
+        "entry_price": 78.54,
+        "current_price": 78.54,
+        "target_price": 82.467,
+        "current_gain_pct": 0.0,
+        "days_held": 7,
+        "pre_alert": true,
+        "target_hit": false,
+        "pre_rs_alert": false,
+        "signal": "WATCH",
+        "size": "\u2014",
+        "score": 49.1,
+        "rs_er": 0.4168,
+        "rs_trend": "VERDE",
+        "rs_baff": 0,
+        "rs_kpct": 2.37,
+        "rs_above": true,
+        "sec_above": true,
+        "sec_er": 1.0,
+        "sar_bullish": true,
+        "vortex_bullish": false,
+        "rvi_bullish": false,
+        "weight_pct": 100.0,
+        "warning": null,
+        "exit_reason": "EXIT3 \u2014 Score < 35 o 2+ condizioni negative",
+        "exit_price": 78.54,
+        "final_gain_pct": 0.0,
+        "exit_date": "2026-11-27"
       }
     ],
     "cooldown": {
-      "WCOS.MI": "2026-11-26"
+      "WCOS.MI": "2026-11-26",
+      "WCOD.MI": "2026-11-27"
     }
   }
 }
